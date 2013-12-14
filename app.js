@@ -1,44 +1,43 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express');
-var routes = require('./routes');
-var user = require('./routes/user');
+var routes = require('./routes/index.js');
+var searchs = require('./routes/search.js');
+var socketioservice = require('./routes/socketio.js');
 var http = require('http');
 var path = require('path');
 
 var app = express();
+var server = http.createServer(app);
+var io = require('socket.io').listen(server);
 
-// all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.VCAP_APP_PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/client", express.static(__dirname + '/client'));
-app.use("/client_styles", express.static(__dirname + '/client/styles'));
-app.use("/client_js", express.static(__dirname + '/client/js'));
-app.use("/client_images", express.static(__dirname + '/client/images'));
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
-
-app.get('/', function (req, res ) {
-  res.sendfile(__dirname + '/client/index.html');
+// Handle Errors gracefully
+app.use(function(err, req, res, next) {
+	if(!err) return next();
+	console.log(err.stack);
+	res.json({error: true});
 });
 
-//app.get('/', routes.index);
-app.get('/users', user.list);
+// Main App Page
+app.get('/', routes.index);
 
-http.createServer(app).listen(app.get('port'), function(){
+// MongoDB API Routes
+app.get('/search/alarms', searchs.alarms);
+app.get('/polls/polls', routes.list);
+app.get('/polls/:id', routes.poll);
+app.post('/polls', routes.create);
+app.post('/vote', routes.vote);
+
+io.sockets.on('connection', socketioservice.socketioservice);
+
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

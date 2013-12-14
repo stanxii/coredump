@@ -1,16 +1,24 @@
-guolu
-=====
+# Building a real-time polls application with Node.js, AngularJS and MongoDB
 
-backbone-nodejs-handlebars-requirejs-html templates express socketio 
+This application allows you to create polls - and enables users to vote on polls,
+with the results updating in real-time. The app accompanies the IBM developerWorks article
+[Building a real-time application with Node.js, AngularJS and MongoDB](http://www.ibm.com/developerworks/article_url_here).
 
-1 demo for backbone view use text html handlebars templates
-2 demo for backbone with node.js and express in server backbone in client
-3 client and server use socket.io realtime 
-4. backbone client mvc and use socket.io listen to server json data change.
-5. when server json data change use backbone view.listento(model.change. view.render) auto render backbone view.
-6. use handlebars html template and bootstrap layout view and router client. and render view. when model data change trigger from server json data changes.
+The app uses the following libraries and frameworks:
 
-7. all archive with node + express . express server router can do for json rest api router. to return json data.
+* Node.js
+* Express
+* Jade templates
+* Mongoose
+* AngularJS
+* Bootstrap 3
+* Socket.io
 
-8. user css3 and d3 for 2d 
-9. for me study .
+## Demo
+
+You can see the app running live at [http://dwnodepolls.ng.bluemix.net/](http://dwnodepolls.ng.bluemix.net/).
+
+## License
+
+The source code for the app is available under the MIT license, which is found in license.txt in the root
+of this repository.
