@@ -1,0 +1,27 @@
+<div class="row-fluid">
+      <!--Body content-->
+        <h3 style="color: #428bca;"> 
+                配置
+        </h3>
+         
+        <form novalidate class="css-form">
+        Name:
+          <input type="text" ng-model="user.name" required /><br />
+        E-mail: <input type="email" ng-model="user.email" required /><br />
+        Gender: <input type="radio" ng-model="user.gender" value="male" />male
+        <input type="radio" ng-model="user.gender" value="female" />female<br />
+        <button ng-click="reset()">RESET</button>
+        <button ng-click="update(user)">SAVE</button>
+      </form>
+
+</div> 
+
+<style type="text/css">
+      .css-form input.ng-invalid.ng-dirty {
+        background-color: #FA787E;
+      }
+    
+      .css-form input.ng-valid.ng-dirty {
+        background-color: #78FA89;
+      }
+    </style>

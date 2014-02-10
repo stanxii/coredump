@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="nggl">
+<head>
+    <meta charset="utf-8">
+    <title>Huan Bao Network Manager System</title>
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/rating.css">
+    
+    <!-- <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet"> -->
+    <link href="/lib/bootstrap3.03/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="/lib/font-awesome-4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+    <!--
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet"> -->
+
+    <!-- This is needed because Facebook login redirects add #_=_ at the end of the URL-->
+    <script type="text/javascript">
+      if (window.location.href.indexOf('#_=_') > 0) {
+          window.location = window.location.href.replace(/#.*/, '');
+      }
+      
+    </script>
+</head>
+<body ng-cloak>
+
+    <div ng-controller="NavCtrl">
+		<div  class="navbar navbar-inverse" role="navigation">
+	
+			
+			  <ul class="nav navbar-nav">
+				<li access-level="accessLevels.anon" active-nav="active-nav"><a href="/login">登录</a></li>
+				<li access-level="accessLevels.admin" active-nav="active-nav"><a href="/register">注册</a></li>
+				<li access-level="accessLevels.user" active-nav="active-nav"><a href="/">主页</a></li>           
+				<li access-level="accessLevels.user" active-nav="active-nav"><a href="/jinliao">进料</a></li>
+                <li access-level="accessLevels.user" active-nav="active-nav"><a href="/chuzha">出渣口</a></li>
+                <li access-level="accessLevels.user" active-nav="active-nav"><a href="/yinfengji">引风机</a></li>
+                <li access-level="accessLevels.user" active-nav="active-nav"><a href="/shuibeng">水泵</a></li>
+                <li access-level="accessLevels.user" active-nav="active-nav"><a href="/wendu">温度检测</a></li>
+                <li access-level="accessLevels.user" active-nav="active-nav"><a href="/gufengji">鼓风机</a></li>               
+                <li access-level="accessLevels.user" active-nav="active-nav"><a href="/globalconfig">全局配置</a></li>               
+                <li access-level="accessLevels.user" active-nav="active-nav"><a href="/alarms">告警</a></li>               
+				<li access-level="accessLevels.admin" active-nav="active-nav"><a href="/admin">管理员</a></li>
+				<li access-level="accessLevels.user"><a href="" ng-click="logout()">登出</a></li>
+			  </ul>
+
+             
+
+			  <div id="userInfo" access-level="accessLevels.user" class="pull-right">Welcome&nbsp;<strong>{{ user.username }}&nbsp;</strong><span ng-class="{&quot;label-info&quot;: user.role.title == userRoles.user.title, &quot;label-success&quot;: user.role.title == userRoles.admin.title}" class="label">{{ user.role.title }}</span></div>
+		
+		
+		</div>
+
+		<div class="container">
+          <div class="row">
+             <div class="col-md-2">
+                <ul class="nav nav-pills nav-stacked">
+                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/jinliao">进料</a></li>
+                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/chuzha">出渣口</a></li>
+                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/yinfengji">引风机</a></li>
+                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/shuibeng">水泵</a></li>
+                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/wendu">温度检测</a></li>
+                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/gufengji">鼓风机</a></li>               
+                 </ul>
+             </div>
+
+            <div class="col-md-10">
+                 <div ng-view="ng-view"></div>
+                 <div class="alert alert-error" ng-bind="error" ng-show="error"><div> 
+            </div>
+          </div>		  
+		</div>
+    </div>    
+
+    <script src="/lib/underscore-min.js"></script>    
+    <script src="/lib/angular/angular.min.js"></script>
+    <script src="/lib/angular/angular-cookies.min.js"></script>
+    <script src="/lib/angular/angular-route.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>    
+    <script src="/js/routingConfig.js"></script>    
+    <script src="/lib/moment/moment.min.js"></script>
+    <script src="/lib/raphael-min.js"></script>
+    <script src="/lib/justgage.1.0.1.js"></script>
+    <script src="/js/ng-justgage.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/services.js"></script>
+    <script src="/js/controllers.js"></script>
+    <script src="/js/filters.js"></script>
+    <script src="/js/directives.js"></script>
+</body>  
+</html>
