@@ -18,6 +18,7 @@ app.set('views', __dirname + '/client/views');
 
 //app.set('views', __dirname + '/client/views');
 //app.set('view engine', 'jade');
+//xxx
 
 app.use(express.logger('dev'))
 app.use(express.cookieParser());
