@@ -1,0 +1,13 @@
+//create index questions
+
+
+curl -XPOST 'http://localhost:9200/coredump/' -d '{
+    "settings" : {
+        "index" : {
+            "number_of_shards" : 3,
+            "number_of_replicas" : 2
+        }
+    }
+}'
+
+curl -XPOST 'http://localhost:9200/coredump/questions/1' -d @add-colors-to-table-cell.json

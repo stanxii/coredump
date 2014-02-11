@@ -76,7 +76,13 @@ angular.module('nggl', ['ngCookies', 'ngRoute', 'ngJustGage', 'ngDateTime'])
             templateUrl:    '/partials/private.alarms.html',
             controller:     'AlarmsCtrl',
             access:         access.user
-        });   
+        });
+    $routeProvider.when('/questions/ask',
+        {
+            templateUrl:    '/partials/private.questions.ask.html',
+            controller:     'QuestionsAskCtrl',
+            access:         access.user
+        });       
     $routeProvider.when('/admin',
         {
             templateUrl:    '/partials/admin.html',

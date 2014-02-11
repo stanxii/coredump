@@ -302,4 +302,23 @@ function($rootScope, $scope, socket) {
     });
 }]);
 
+angular.module('nggl')
+.controller('QuestionsAskCtrl',
+[   '$rootScope', '$scope', 'socket', 
+function($rootScope, $scope, socket) {
+
+    $scope.question = {
+        //Dt: Date.now(),       
+        askdate: new Date(),
+        title: $scope.qtitle,
+        description: $scope.description,
+        temp: 200,
+        orderProp: "alarmtime",
+    };
+
+    $scope.askQuestionAction = function(action) {
+        var jsondata = '{"cmd":"questions.ask","action":"' + action + '"}';
+        socket.emit('send:gufengji' , jsondata);
+    }
+}]);
 
