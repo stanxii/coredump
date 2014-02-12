@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/rating.css">
     
+    <link rel="stylesheet" href="http://pagedown.googlecode.com/hg/demo/browser/demo.css">
+    
+
     
     <link href="/lib/bootstrap-3.1.0-dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -49,27 +52,17 @@
 		
 		</div>
 
-		<div class="container">
-          <div class="row">
-             <div class="col-md-2">
-                <ul class="nav nav-pills nav-stacked">
-                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/jinliao">进料</a></li>
-                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/chuzha">出渣口</a></li>
-                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/yinfengji">引风机</a></li>
-                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/shuibeng">水泵</a></li>
-                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/wendu">温度检测</a></li>
-                     <li access-level="accessLevels.user" active-nav="active-nav"><a href="/gufengji">鼓风机</a></li>               
-                 </ul>
-             </div>
 
-            <div class="col-md-10">
+    <div id="allnav" class="row col-md-12"> all navigative</div>           
+		<div class="container">    
+          <div class="row">            
                  <div ng-view="ng-view"></div>
-                 <div class="alert alert-error" ng-bind="error" ng-show="error"><div> 
-            </div>
+                 <div class="alert alert-error" ng-bind="error" ng-show="error"><div>             
           </div>		  
 		</div>
     </div>    
 
+    <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="/lib/underscore-min.js"></script>    
     <script src="/lib/angular/angular.min.js"></script>
     <script src="/lib/angular/angular-cookies.min.js"></script>
@@ -77,9 +70,16 @@
     <script src="/socket.io/socket.io.js"></script>    
     <script src="/js/routingConfig.js"></script>    
     <script src="/lib/moment/moment.min.js"></script>
+    <script src="http://pagedown.googlecode.com/hg/Markdown.Converter.js"></script>
+    <script src="http://pagedown.googlecode.com/hg/Markdown.Sanitizer.js"></script>
+    <script src="http://pagedown.googlecode.com/hg/Markdown.Editor.js"></script>
+
     <script src="/lib/raphael-min.js"></script>
     <script src="/lib/justgage.1.0.1.js"></script>
     <script src="/js/ng-justgage.js"></script>
+    
+
+
     <script src="/js/app.js"></script>
     <script src="/js/services.js"></script>
     <script src="/js/controllers.js"></script>

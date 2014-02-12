@@ -34,6 +34,76 @@ angular.module('nggl')
 }]);
 
 
+angular.module('nggl').directive('pagedownAdmin', function ($compile, $timeout) {
+    var nextId = 0;
+    var converter = Markdown.getSanitizingConverter();
+    converter.hooks.chain("preBlockGamut", function (text, rbg) {
+        return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+            return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+        });
+    });
+    
+    return {
+        require: 'ngModel',
+        replace: true,
+        template: '<div class="pagedown-bootstrap-editor"></div>',
+        link: function (scope, iElement, attrs, ngModel) {
+
+            var editorUniqueId;
+
+            if (attrs.id == null) {
+                editorUniqueId = nextId++;
+            } else {
+                editorUniqueId = attrs.id;
+            }
+
+            var newElement = $compile(
+                '<div>' +
+                   '<div class="wmd-panel">' +
+                      '<div id="wmd-button-bar-' + editorUniqueId + '"></div>' +
+                      '<textarea class="wmd-input" id="wmd-input-' + editorUniqueId + '">' +
+                      '</textarea>' +
+                   '</div>' +
+                   '<div id="wmd-preview-' + editorUniqueId + '" class="pagedown-preview wmd-panel wmd-preview"></div>' +
+                '</div>')(scope);
+
+            iElement.html(newElement);
+
+            var help = function () {
+                alert("There is no help");
+            }
+
+            var editor = new Markdown.Editor(converter, "-" + editorUniqueId, {
+                handler: help
+            });
+
+            var $wmdInput = iElement.find('#wmd-input-' + editorUniqueId);
+
+            var init = false;
+
+            editor.hooks.chain("onPreviewRefresh", function () {
+              var val = $wmdInput.val();
+              if (init && val !== ngModel.$modelValue ) {
+                $timeout(function(){
+                  scope.$apply(function(){
+                    ngModel.$setViewValue(val);
+                    ngModel.$render();
+                  });
+                });
+              }              
+            });
+
+            ngModel.$formatters.push(function(value){
+              init = true;
+              $wmdInput.val(value);
+              editor.refreshPreview();
+              return value;
+            });
+
+            editor.run();
+        }
+    }
+});
 
 angular.module('nggl').directive('activeNav', ['$location', function($location) {
     return {
