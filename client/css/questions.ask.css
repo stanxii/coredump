@@ -1,6 +1,6 @@
-.ask-title-field{
-	margin-left: 30px;
-	width: 80%;
+.ask-title-field{	
+	width: 90%;
+	height: 42px;
 }
 
 .edit-field-overlay{
@@ -12,8 +12,11 @@
 	white-space: nowrap;
 }
 
-.ask-tag-field {
-	margin-left: 30px;
-	width: 80%;
+.ask-tag-field {	
+	width: 90%;
 }
 
+.warn {
+	background: #ffefc6;
+	color: #960;
+}
