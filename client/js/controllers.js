@@ -12,6 +12,7 @@ angular.module('nggl')
 		$location.path( path );
 	};
 
+
     $scope.logout = function() {
         Auth.logout(function() {
             $location.path('/login');
@@ -344,9 +345,9 @@ function($rootScope, $scope, socket) {
         orderProp: "alarmtime",
     };
 
-    $scope.askQuestionAction = function(action) {
-        var jsondata = '{"cmd":"questions.ask","action":"' + action + '"}';
-        socket.emit('send:gufengji' , jsondata);
+    $scope.askQuestion = function() {
+        var jsondata = '{"cmd":"questions.ask","action":"' + 1 + '"}';
+        socket.emit('send:questions.ask' , jsondata);
     }
 }]);
 

@@ -1,10 +1,12 @@
-
-
 <row>
-  
-  <div class="col-md-9">
-    	<label for="title"><h2>提出新问题:</h2></label>
-    	<input id="title" name="title" type="text" maxlength="300" tabindex="100" class="ask-title-field" data-min-length="15" data-max-length="150" placeholder="标题,用最简短的一句话说清您的问题。">
+    <div class="col-md-12">
+        <label for="title"><h2>提出新问题:</h2></label>
+    </div>
+</row>
+
+<row>  
+  <div class="col-md-9">    	
+    	<input id="title" name="title" type="text" maxlength="300" tabindex="100" class="ask-title-field" data-min-length="15" data-max-length="150" placeholder="标题,用一句话说清您的问题。">
     	<br/>
     	<span class="edit-field-overlay">您有什么编程问题？请上代码,越详细越好！</span>
 
@@ -27,7 +29,7 @@
 
 		<div id="ask-btn-field">
 			<br/>
-			<button type="button" class="btn btn-primary btn-lg" id="submit-button" tabindex="120">
+			<button type="button" ng-click="askQuestion()" class="btn btn-primary btn-lg" id="submit-button" tabindex="120">
 			  <span class="glyphicon glyphicon-ok"></span> 提交问题
 			</button>			
 		</div>
