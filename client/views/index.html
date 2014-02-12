@@ -5,9 +5,9 @@
     <title>Huan Bao Network Manager System</title>
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/rating.css">
-    
-    <link rel="stylesheet" href="http://pagedown.googlecode.com/hg/demo/browser/demo.css">
-    
+    <link rel="stylesheet" href="/css/questions.ask.css">
+   <!-- <link rel="stylesheet" href="http://pagedown.googlecode.com/hg/demo/browser/demo.css">-->
+    <link rel="stylesheet" href="/css/defaultstyle.css">
 
     
     <link href="/lib/bootstrap-3.1.0-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -53,7 +53,16 @@
 		</div>
 
 
-    <div id="allnav" class="row col-md-12"> all navigative</div>           
+    <div id="allnav" class="row">
+		<div class="col-md-10">
+		
+		</div>
+		<div class="col-md-2">
+			<button type="button" class="btn btn-primary btn-lg" id="ask-button" tabindex="120" ng-click="go('/questions/ask')">
+			  <span class="glyphicon glyphicon-star"></span> 提问
+			</button>
+		</div>
+	</div>           
 		<div class="container">    
           <div class="row">            
                  <div ng-view="ng-view"></div>
