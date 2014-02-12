@@ -7,6 +7,10 @@ angular.module('nggl')
     $scope.user = Auth.user;
     $scope.userRoles = Auth.userRoles;
     $scope.accessLevels = Auth.accessLevels;
+	
+	$scope.go = function ( path ) {
+		$location.path( path );
+	};
 
     $scope.logout = function() {
         Auth.logout(function() {

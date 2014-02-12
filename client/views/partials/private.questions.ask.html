@@ -1,21 +1,20 @@
 
 
 <row>
+  
   <div class="col-md-9">
-    	<label for="title">提问</label>
+    	<label for="title">提问:</label>
 
     	<input id="title" name="title" type="text" maxlength="300" tabindex="100" class="ask-title-field" data-min-length="15" data-max-length="150">
     	<br/>
     	<span class="edit-field-overlay">您有什么编程问题？请上代码,越详细越好！</span>
 
-        <div ng-repeat="question in modal.data.questions"> 
-        <textarea data-modal="modal"
+        <textarea class="questions-ask-textarea" data-modal="modal"
                data-pagedown-admin=""
                data-ng-model="question.text"></textarea>
-        </div>
-
-       	<label>Tags</label>
-        <input id="tagnames" name="tagnames" type="text" size="60" value="" tabindex="103">
+		<br/>
+       	<label>Tags:</label>
+        <input id="tagnames" name="tagnames" type="text" class="ask-tag-field" value="" tabindex="103">
         <span class="edit-field-overlay">至少一个标签，比如(mysql java regex), 最多5个标签.</span>
     	
     	<div class="form-item">
@@ -27,9 +26,13 @@
             
         </div>
 
-      
-        <input id="submit-button" type="button" value="确认提问" tabindex="120">
-        <a href="#" class="discard-question dno">取消提问</a>
+		<div id="ask-btn-field">
+			<br/>
+			<button type="button" class="btn btn-primary btn-lg" id="submit-button" tabindex="120">
+			  <span class="glyphicon glyphicon-ok"></span> 提交问题
+			</button>			
+		</div>
+        <br/><br/><br/>
     </div>
     
     <div class="col-md-3">
