@@ -112,22 +112,33 @@ exports.actions = function(socket) {
         });
 
         socket.on('send:gufengji', function(data) {
-               console.log("server gufengji rev:" + data);
+            console.log("server gufengji rev:" + data);
 
-               var ip  = "192.168.1.168";
+            var ip  = "192.168.1.168";
                //receive from web brower and sent to device udp port.
-                var dgram = require('dgram');
-                var strdata = JSON.stringify(data);
+            var dgram = require('dgram');
+            var strdata = JSON.stringify(data);
         		console.log("str cmd="+ strdata);
             strdata = myReplaceFunc(strdata, "\\");
-          console.log("str cmd===+++new +++++++========"+ strdata);
-				var message = new Buffer(strdata);
-				var client = dgram.createSocket("udp4");
-				client.send(message, 0, message.length, 12346, ip, function(err, bytes) {
+            console.log("str cmd===+++new +++++++========"+ strdata);
+    				var message = new Buffer(strdata);
+    				var client = dgram.createSocket("udp4");
+    				client.send(message, 0, message.length, 12346, ip, function(err, bytes) {
 
-					console.log("send ok  result="+ bytes);
-				  client.close();
-				});
+    					console.log("send ok  result="+ bytes);
+    				  client.close();
+    				});
+
+        });
+        //////////////////////////////////cmd
+        socket.on('send:questions.ask', function(data) {
+            console.log("send:questions.ask recv:" + data);
+
+            var question = data;
+            var squestion = JSON.stringify(question);
+            
+            console.log("string question new +++++++========"+ squestion);
+
 
         });
 };

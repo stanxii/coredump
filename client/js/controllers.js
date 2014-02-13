@@ -312,24 +312,15 @@ angular.module('nggl')
 [   '$rootScope', '$scope', 'socket', 
 function($rootScope, $scope, socket) {
 
-
-    $scope.modal = {}
-    $scope.modal.data = {questions : []}
-
-
-
-
     $scope.question = {
         //Dt: Date.now(),       
         askdate: new Date(),
-        title: $scope.qtitle,
-        description: $scope.description,
-        temp: 200,
-        orderProp: "alarmtime",
+        title: "",
+        description: ""        
     };
 
     $scope.askQuestion = function() {
-        var jsondata = '{"cmd":"questions.ask","action":"' + 1 + '"}';
+        var jsondata = $scope.question ;
         socket.emit('send:questions.ask' , jsondata);
     }
 }]);
