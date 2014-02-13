@@ -316,24 +316,7 @@ function($rootScope, $scope, socket) {
     $scope.modal = {}
     $scope.modal.data = {questions : []}
 
-    $scope.unpopulate = function(){    
-        $scope.modal.data = {questions : []}    
-        for(var i=1; i<=3;i++) {
-          var question = {id:i,text: undefined};
-          $scope.modal.data.questions.push(question)
-        }    
-      }
-    $scope.populate = function(){  
-        $scope.modalForm.$setPristine(true)  
-        $scope.modal.data = {questions : []}
-        for(var i=1; i<=3;i++) {
-          var question = {id:i,text: "Question no " + i};
-          $scope.modal.data.questions.push(question)
-        }    
-    }   
 
-    $scope.unpopulate();
-    console.dir($scope.modalForm)
 
 
     $scope.question = {
