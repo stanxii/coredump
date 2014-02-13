@@ -42,6 +42,9 @@ angular.module('nggl').directive('pagedownAdmin', function ($compile, $timeout) 
             return "<blockquote>" + rbg(inner) + "</blockquote>\n";
         });
     });
+  converter.hooks.chain("postConversion", function (text) {
+    return text.replace(/<pre>/gi, "<pre class=prettyprint>");
+});
     
     return {
         require: 'ngModel',
@@ -88,6 +91,7 @@ angular.module('nggl').directive('pagedownAdmin', function ($compile, $timeout) 
                   scope.$apply(function(){
                     ngModel.$setViewValue(val);
                     ngModel.$render();
+                    prettyPrint();
                   });
                 });
               }              
