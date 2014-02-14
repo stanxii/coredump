@@ -129,16 +129,5 @@ exports.actions = function(socket) {
     				  client.close();
     				});
 
-        });
-        //////////////////////////////////cmd
-        socket.on('send:questions.ask', function(data) {
-            console.log("send:questions.ask recv:" + data);
-
-            var question = data;
-            var squestion = JSON.stringify(question);
-            
-            console.log("string question new +++++++========"+ squestion);
-
-
-        });
+        });        
 };

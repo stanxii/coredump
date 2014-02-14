@@ -312,9 +312,7 @@ angular.module('nggl')
 [   '$rootScope', '$scope', 'socket', 
 function($rootScope, $scope, socket) {
 
-    $scope.question = {
-        //Dt: Date.now(),       
-        askdate: new Date(),
+    $scope.question = {               
         title: "",
         description: ""        
     };
