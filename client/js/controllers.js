@@ -310,13 +310,10 @@ function($rootScope, $scope, socket) {
 angular.module('nggl')
 .controller('QuestionsAskCtrl',
 [   '$rootScope', '$scope', '$location', 'socket', 
-function($rootScope, $scope, location, socket) {
+function($rootScope, $scope, $location, socket) {
 
 
-    socket.on('send:questions.ask.res', function (data) {
-         console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
-         $location.path('/questions/detail/1');
-    });
+   
 
     $scope.question = {               
         title: "",
@@ -327,5 +324,44 @@ function($rootScope, $scope, location, socket) {
         var jsondata = $scope.question ;
         socket.emit('send:questions.ask' , jsondata);
     }
+
+    socket.on('send:questions.ask.res', function (data) {
+        console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
+
+        if(data.result == "ok")
+            $location.path('/questions/' + data._id);
+        else
+            return;
+    });
+
 }]);
 
+angular.module('nggl')
+.controller('QuestionsDetailCtrl',
+[   '$rootScope', '$scope', '$routeParams', '$location', 'socket', 
+function($rootScope, $scope, $routeParams, $location, socket) {
+
+    // $routeParams.qid
+
+    console.log("now questionid = " +  $routeParams.qid);
+    var jsondata = {
+            qid : $routeParams.qid
+        }
+    socket.emit('send:questions.question' , jsondata);
+    
+    $scope.question = {               
+        title: "",
+        description: ""        
+    };
+
+    socket.on('send:questions.question.res', function (data) {
+        console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
+         
+        if(data.result === "ok")
+            $scope.question = data.question;
+        else
+            return;
+
+    });
+    
+}]);

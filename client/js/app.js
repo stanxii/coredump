@@ -83,6 +83,12 @@ angular.module('nggl', ['ngCookies', 'ngRoute', 'ngJustGage', 'ngDateTime'])
             controller:     'QuestionsAskCtrl',
             access:         access.user
         });       
+    $routeProvider.when('/questions/:qid',
+        {
+            templateUrl:    '/partials/private.questions.question.html',
+            controller:     'QuestionsDetailCtrl',
+            access:         access.user
+        });       
     $routeProvider.when('/admin',
         {
             templateUrl:    '/partials/admin.html',

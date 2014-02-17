@@ -21,13 +21,13 @@ var MongoClient = require('mongodb').MongoClient
 
            jsondata.asktime = asktime;
           
-          collection.insert(jsondata, function(err, docs) {
+          collection.insert(jsondata, function(err, doc) {
             // Locate all the entries using find
             if(err){
-              console.log(docs);
-              socket.emit('send:questions.ask.res', '{"result": "failed"}');
+              console.log(doc);
+              socket.emit('send:questions.ask.res', {"result": "failed"});
             }else{
-              console.log(docs);
+              console.log(doc);
               // Let's close the db              
               db.close();          
 
@@ -40,22 +40,30 @@ var MongoClient = require('mongodb').MongoClient
 
               //get computer id number
               // index a document
+              jsondata._id = jsondata._id.toHexString();
               console.log("when index jsondata===" + jsondata);
-              delete jsondata["_id"];
+              
+              //delete jsondata["_id"];
               //jsondata._id = 1;
               client.index({
                 index: 'questions',
-                type: 'detail', 
-                id: 1,               
+                type: 'question', 
+                id: jsondata._id,               
                 body: jsondata
               }, function (error, response) {
                 // ...
+                var res = {
+                  result: "",
+                  _id: jsondata._id
+                }
                 if(error){
                   console.log("index the ES data failed");
-                  socket.emit('send:questions.ask.res', '{"failed": "ok"}');          
+                  res.result = "failed";
+                  socket.emit('send:questions.ask.res', res);          
                 }else{
                   console.log("index the ES data ok");
-                  socket.emit('send:questions.ask.res', '{"result": "ok"}');  
+                  res.result = "ok";                                  
+                  socket.emit('send:questions.ask.res', res);  
                 }
 
                 client.close();
@@ -69,6 +77,28 @@ var MongoClient = require('mongodb').MongoClient
             }
               
           });      
+        }
+        else if(action == "questions.question"){
+
+          console.log("now questionid "+ jsondata.qid)
+          ObjectID = require('mongodb').ObjectID;
+
+          collection.findOne({_id: ObjectID.createFromHexString(jsondata.qid) }, function(err, document){
+              if(err){
+                console.log("findone error");
+                var res ={result:"failed"};
+                socket.emit('send:questions.question.res', res);  
+                return;
+              }
+
+              console.log(document);
+              console.log(document.description);
+                var res = {
+                  result:"ok",
+                  question: document
+                }
+                socket.emit('send:questions.question.res', res);  
+            });
         }
         else if(action == "newest"){
           // Locate all the entries using find
@@ -129,6 +159,15 @@ exports.questionsAction = function(socket) {
               
 
         });
+
+        socket.on('send:questions.question', function(data) {              
+              console.log("server send:questions.question rev:" + JSON.stringify(data));
+              doMongodbOpt(socket, "questions.question",data);
+              
+
+        });
+
+
 //Question query
         socket.on('send:questions.newest', function(data) {
               var tips = "The newest questions";
