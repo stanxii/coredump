@@ -309,8 +309,14 @@ function($rootScope, $scope, socket) {
 
 angular.module('nggl')
 .controller('QuestionsAskCtrl',
-[   '$rootScope', '$scope', 'socket', 
-function($rootScope, $scope, socket) {
+[   '$rootScope', '$scope', '$location', 'socket', 
+function($rootScope, $scope, location, socket) {
+
+
+    socket.on('send:questions.ask.res', function (data) {
+         console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
+         $location.path('/questions/detail/1');
+    });
 
     $scope.question = {               
         title: "",
