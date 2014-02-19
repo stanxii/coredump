@@ -365,3 +365,36 @@ function($rootScope, $scope, $routeParams, $location, socket) {
     });
     
 }]);
+
+angular.module('nggl')
+.controller('QuestionsTopCtrl',
+[   '$rootScope', '$scope', '$location', 'socket', 
+function($rootScope, $scope, $location, socket) {
+
+    // $routeParams.qid
+
+    console.log("now get top 100 questions  = ");
+    $scope.userQuery = "*";
+    var jsondata = {
+            qnum : 100,
+            userQuery: $scope.userQuery
+        }
+    socket.emit('send:questions.top' , jsondata);
+    
+    $scope.questions = [];
+    var question = {
+        title:"",
+        description: ""
+    }
+
+    socket.on('send:questions.top.res', function (data) {
+        console.log("send:questions.top.res alarms list" + JSON.stringify(data));         
+         
+        if(data.result === "ok")
+            $scope.questions = data.questions;
+        else
+            return;
+
+    });
+    
+}]);

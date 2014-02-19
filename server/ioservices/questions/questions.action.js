@@ -70,10 +70,6 @@ var MongoClient = require('mongodb').MongoClient
 
               });
 
-
-
-
-              
             }
               
           });      
@@ -99,6 +95,55 @@ var MongoClient = require('mongodb').MongoClient
                 }
                 socket.emit('send:questions.question.res', res);  
             });
+        }
+        else if(action == "top"){
+          // 主页 topest 100 question 
+          //按提问时间排序最近提问的100个问题
+          var elasticsearch = require('elasticsearch');
+          var client = new elasticsearch.Client({
+            host: 'localhost:9200',
+            log: 'trace'
+          });    
+
+          var userQuery = {};
+
+          client.search({
+              index: 'questions',
+              type: 'question',              
+              size: jsondata.qnum,
+              body: {                
+                  query: {
+                    match_all: {}
+                  }                        
+              }
+            }, function (error, response) {
+              var res = {
+                  result:"ok",
+                  questions: ""
+                }
+
+              if (err) {
+                // handle error
+                res.result = "failed";
+                socket.emit('send:questions.top.res', res);  
+                return;
+              }
+              console.log("now search result = " + JSON.stringify(response));
+
+                res.questions = response.hits.hits;
+                /*
+                var  searchres [];
+                for(int i= 0; i< response.hits.hits.length; i++ ){
+                    searchres.push
+                }
+                */
+
+                socket.emit('send:questions.top.res', res);  
+
+            });
+
+
+
         }
         else if(action == "newest"){
           // Locate all the entries using find
@@ -169,6 +214,11 @@ exports.questionsAction = function(socket) {
 
 
 //Question query
+        socket.on('send:questions.top', function(data) {             
+              console.log("server send:questions.top rev:" + JSON.stringify(data));
+              doMongodbOpt(socket, "top", data);              
+
+        });
         socket.on('send:questions.newest', function(data) {
               var tips = "The newest questions";
               console.log("server rev:" + JSON.stringify(data));
