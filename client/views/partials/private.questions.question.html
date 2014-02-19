@@ -1,9 +1,8 @@
 <row>
     <div class="col-md-12">
-        <h1>{{question.title}}</h1>
+       <label for="title"><h2>{{question.title}}</h2></label>
     </div>
 </row>
-
 <row>        
     <div class="form">       
         <div class="col-md-9">
@@ -47,16 +46,22 @@
 				<br/>
 			</div>
 			<div id="question-btn-field">
-			<br/>
-			<button type="button" ng-click="submitAnswer()" class="btn btn-primary btn-lg" id="submit-button">
-			  <span class="glyphicon glyphicon-ok"></span> 提交
-			</button>	
-			<br/>
-			<br/>
+				<br/>
+				<button type="button" ng-click="submitAnswer()" class="btn btn-primary btn-lg" id="submit-button">
+				  <span class="glyphicon glyphicon-ok"></span> 提交
+				</button>	
+				<br/>
+				<br/>
+			</div>
 		</div>
-        </div>
-
         <div class="col-md-3">
+            <aside>
+                <ul>
+                    <li>提问时间 今天</li>
+                    <li>看过  22次</li>
+                    <li>active 今天</li>
+                </ul>
+            </aside>
             <aside class="warn edit-guide">
                 <h3>提问指南</h3>
                 <ul>
@@ -64,6 +69,6 @@
                     <li>良好的排版，正确使用 Markdown 语法</li>
                 </ul>
             </aside>
-    </div>    
+       
 
 </row>

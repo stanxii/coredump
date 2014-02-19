@@ -5,12 +5,22 @@ angular.module('nggl', ['ngCookies', 'ngRoute', 'ngJustGage', 'ngDateTime'])
 
     var access = routingConfig.accessLevels;
 
+/*
     $routeProvider.when('/',
         {
             templateUrl:    '/partials/home.html',
             controller:     'HomeCtrl',
             access:         access.user
         });
+*/        
+     $routeProvider.when('/',
+        {
+            templateUrl:    '/partials/private.questions.top.html',
+            controller:     'QuestionsTopCtrl',
+            access:         access.user
+        });    
+
+
     $routeProvider.when('/login',
         {
             templateUrl:    '/partials/login.html',
@@ -82,7 +92,7 @@ angular.module('nggl', ['ngCookies', 'ngRoute', 'ngJustGage', 'ngDateTime'])
             templateUrl:    '/partials/private.questions.ask.html',
             controller:     'QuestionsAskCtrl',
             access:         access.user
-        });       
+        });               
     $routeProvider.when('/questions/:qid',
         {
             templateUrl:    '/partials/private.questions.question.html',

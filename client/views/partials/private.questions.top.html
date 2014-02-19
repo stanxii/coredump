@@ -1,0 +1,19 @@
+
+<row>  
+  <div class="col-md-9">
+    <a href="#">Inbox <span class="badge">42</span></a>
+
+      <ul class="questions">
+              <li ng-repeat="question in questions "
+                  class="question-item">
+
+                <span class="fa-hover col-md-3 col-sm-4"><i class="fa fa-envelope fa-2x"></i> 告警信息</span>                
+                类型<span class="cmd">{{question}}</span>
+                snip<span class="temp">{{question.descripton}}</span>
+                
+              </li>
+    </ul>
+  </div>
+  <div class="col-md-3">
+  </div>
+</row>    
