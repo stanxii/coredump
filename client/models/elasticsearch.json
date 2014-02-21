@@ -1,3 +1,19 @@
+
+//mapping
+curl -XPOST 'http://localhost:9200/questions/question' -d '{
+{
+    "question" : {
+        "properties" : {
+        	"title" : {"type" : "string", "index" : "analyzed"},
+            "user" : {"type" : "string", "index" : "not_analyzed"},
+            "description" : {"type" : "string", "null_value" : "na"},
+            "asktime" : {"type" : "date", "format": "yyyy-MM-ddTHH:mm:ss"},
+            "priority" : {"type" : "integer"},
+            "rank" : {"type" : "float"}
+        }
+    }
+}
+
 //create index questions
 
 
@@ -11,3 +27,4 @@ curl -XPOST 'http://localhost:9200/coredump/' -d '{
 }'
 
 curl -XPOST 'http://localhost:9200/coredump/questions/1' -d @add-colors-to-table-cell.json
+
