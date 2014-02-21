@@ -16,7 +16,28 @@
 	width: 90%;
 }
 
+.answer-tag-field {	
+	width: 90%;
+	height: 70px;
+}
+
+.question-answer {	
+	float: right;
+	margin-top: -10px;
+}
+
+.question-answer  label{	
+	margin: 0;
+}
+
+hr {
+	width:90%;
+	margin: 10px 0px !important;
+	border-top:1px dashed #0066CC !important;
+}
+
 .warn {
 	background: #ffefc6;
 	color: #960;
+	margin-top: -20px;
 }
