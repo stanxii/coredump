@@ -1,15 +1,16 @@
 
-
-
-var questionTopFun = function(socket, jsondata){
-    // 主页 topest 100 question 
-          //按提问时间排序最近提问的100个问题
-          var elasticsearch = require('elasticsearch');
+var elasticsearch = require('elasticsearch');
+          
           var client = new elasticsearch.Client({
             host: 'localhost:9200',
             log: 'trace'
           });    
 
+
+var questionTopFun = function(socket, jsondata){
+    // 主页 topest 100 question 
+          //按提问时间排序最近提问的100个问题
+          
           var userQuery = {};
 
           client.search({
