@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('nggl', ['ngCookies', 'ngRoute', 'ngJustGage', 'ngDateTime'])
+angular.module('nggl', ['ngCookies', 'ngRoute',  'ngDateTime'])
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider, ngDateTime) {
 
     var access = routingConfig.accessLevels;
@@ -38,55 +38,7 @@ angular.module('nggl', ['ngCookies', 'ngRoute', 'ngJustGage', 'ngDateTime'])
             templateUrl:    '/partials/private.html',
             controller:     'PrivateCtrl',
             access:         access.user
-        });
-    $routeProvider.when('/jinliao',
-        {
-            templateUrl:    '/partials/private.jinliao.html',
-            controller:     'JinliaoCtrl',
-            access:         access.user
-        });
-    $routeProvider.when('/chuzha',
-        {
-            templateUrl:    '/partials/private.chuzha.html',
-            controller:     'ChuzhaCtrl',
-            access:         access.user
-        });
-    $routeProvider.when('/yinfengji',
-        {
-            templateUrl:    '/partials/private.yinfengji.html',
-            controller:     'YinfengjiCtrl',
-            access:         access.user
-        });   
-    $routeProvider.when('/shuibeng',
-        {
-            templateUrl:    '/partials/private.shuibeng.html',
-            controller:     'ShuibengCtrl',
-            access:         access.user
-        });   
-    $routeProvider.when('/wendu',
-        {
-            templateUrl:    '/partials/private.wendu.html',
-            controller:     'WenduCtrl',
-            access:         access.user
-        });
-     $routeProvider.when('/gufengji',
-        {
-            templateUrl:    '/partials/private.gufengji.html',
-            controller:     'GufengjiCtrl',
-            access:         access.user
-        });   
-    $routeProvider.when('/globalconfig',
-        {
-            templateUrl:    '/partials/private.config.html',
-            controller:     'GlobalconfigCtrl',
-            access:         access.user
-        });   
-    $routeProvider.when('/alarms',
-        {
-            templateUrl:    '/partials/private.alarms.html',
-            controller:     'AlarmsCtrl',
-            access:         access.user
-        });
+        });    
     $routeProvider.when('/questions/ask',
         {
             templateUrl:    '/partials/private.questions.ask.html',
