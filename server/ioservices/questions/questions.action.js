@@ -1,20 +1,74 @@
 
 
+
+var questionTopFun = function(socket, jsondata){
+    // 主页 topest 100 question 
+          //按提问时间排序最近提问的100个问题
+          var elasticsearch = require('elasticsearch');
+          var client = new elasticsearch.Client({
+            host: 'localhost:9200',
+            log: 'trace'
+          });    
+
+          var userQuery = {};
+
+          client.search({
+              index: 'questions',
+              type: 'question',                            
+              body: {                
+                  query: {
+                    match_all: {}
+                  } ,
+                  size: jsondata.qnum,                       
+              }
+            }, function (error, response) {
+              var res = {
+                  result:"ok",
+                  questions: ""
+                }
+
+              if (error) {
+                // handle error
+                res.result = "failed";
+                socket.emit('send:questions.top.res', res);  
+                return;
+              }
+              //console.log("now search result = " + JSON.stringify(response));
+
+                res.questions = response.hits.hits;
+                /*
+                var  searchres [];
+                for(int i= 0; i< response.hits.hits.length; i++ ){
+                    searchres.push
+                }
+                */
+
+                socket.emit('send:questions.top.res', res);  
+
+            });
+}
+
 var MongoClient = require('mongodb').MongoClient
     , format = require('util').format;
 
-    var doMongodbOpt = function(socket, action, jsondata) {
-      MongoClient.connect('mongodb://127.0.0.1:27017/coredump', function(err, db) {
+
+MongoClient.connect('mongodb://127.0.0.1:27017/coredump', function(err, db) {
         if(err) throw err;
 
-        
 
-        var collection = db.collection('questions');
+
+    var doMongodbOpt = function(socket, action, jsondata) {
+
+
+        
 
 ///////////////////////////////////////case begin
         if(action == "askquestion"){
           //问一个问题
           //jsondata.asktime = new Date().toLocaleString();
+
+          var collection = db.collection('questions');
+
           var moment = require('moment-timezone');
           var asktime = moment.tz(new Date(), "Asia/Shanghai").format();
            asktime = asktime.substring(0, asktime.indexOf('+'));
@@ -76,6 +130,8 @@ var MongoClient = require('mongodb').MongoClient
         }
         else if(action == "questions.question"){
 
+          var collection = db.collection('questions');
+
           console.log("now questionid "+ jsondata.qid)
           ObjectID = require('mongodb').ObjectID;
 
@@ -97,50 +153,8 @@ var MongoClient = require('mongodb').MongoClient
             });
         }
         else if(action == "top"){
-          // 主页 topest 100 question 
-          //按提问时间排序最近提问的100个问题
-          var elasticsearch = require('elasticsearch');
-          var client = new elasticsearch.Client({
-            host: 'localhost:9200',
-            log: 'trace'
-          });    
-
-          var userQuery = {};
-
-          client.search({
-              index: 'questions',
-              type: 'question',              
-              size: jsondata.qnum,
-              body: {                
-                  query: {
-                    match_all: {}
-                  }                        
-              }
-            }, function (error, response) {
-              var res = {
-                  result:"ok",
-                  questions: ""
-                }
-
-              if (err) {
-                // handle error
-                res.result = "failed";
-                socket.emit('send:questions.top.res', res);  
-                return;
-              }
-              console.log("now search result = " + JSON.stringify(response));
-
-                res.questions = response.hits.hits;
-                /*
-                var  searchres [];
-                for(int i= 0; i< response.hits.hits.length; i++ ){
-                    searchres.push
-                }
-                */
-
-                socket.emit('send:questions.top.res', res);  
-
-            });
+          questionTopFun(socket, jsondata);
+          
 
 
 
@@ -148,6 +162,7 @@ var MongoClient = require('mongodb').MongoClient
         else if(action == "newest"){
           // Locate all the entries using find
           //按提问时间排序最近提问的100个问题
+          var collection = db.collection('questions');
           collection.find()
           .limit(100)
           .sort({asktime: -1})
@@ -162,7 +177,7 @@ var MongoClient = require('mongodb').MongoClient
           //and use search' key c++ redis
           //and user preperence and set node.js reids express
           //select where up's conditions.
-
+           var collection = db.collection('questions'); 
           collection.find()
           .limit(100)
           .sort({asktime: -1})
@@ -172,6 +187,7 @@ var MongoClient = require('mongodb').MongoClient
             db.close();
           });
         }else if(action == "interesting"){
+          var collection = db.collection('questions');
            collection.find()
           .limit(100)
           .sort({asktime: -1})
@@ -191,8 +207,10 @@ var MongoClient = require('mongodb').MongoClient
         }
 ///////////////////////////////////////case end
         
-      });
+      
     }
+
+
 
 exports.questionsAction = function(socket) {
 
@@ -263,3 +281,5 @@ exports.questionsAction = function(socket) {
 
         });
 };
+
+});

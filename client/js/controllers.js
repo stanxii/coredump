@@ -444,7 +444,7 @@ function($rootScope, $scope, $location, socket) {
     }
 
     socket.on('send:questions.top.res', function (data) {
-        console.log("send:questions.top.res alarms list" + JSON.stringify(data));         
+        //console.log("send:questions.top.res alarms list" + JSON.stringify(data));         
          
         if(data.result === "ok"){
             $scope.questions = data.questions;
