@@ -74,12 +74,12 @@ curl -XPOST 'http://localhost:9200/questions/question/1' -d '{
 		{
 			"answer-user": "nixinlong",
 			"description": 'Im trying to make a text-view which on click shows the contact or when we type any letter its shows suggestions of contact. I'm able to read contact from contact book,now i want a text-view which shows only WHATS-APP contact to select. please help me out to read WHATS APP contacts.',
-			"answertime": "2014-02-18T10:16:59"			
+			"answer_dt": "2014-02-18T10:16:59"			
 		},
 		{
 			"answer-user": "stan",
 			"description": 'Hemm trying to make a text-view which on click shows the contact or when we type any letter its shows suggestions of contact. I'm able to read contact from contact book,now i want a text-view which shows only WHATS-APP contact to select. please help me out to read WHATS APP contacts.',
-			"answertime": "2014-02-19T08:16:59"
+			"answer_dt": "2014-02-19T08:16:59"
 		}
 	]
 
