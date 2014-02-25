@@ -141,69 +141,29 @@ function($rootScope, $scope, $routeParams, $location, socket) {
     $scope.answer = {               
         askerid: "",
         imageUrl: "",
-		snippet:"",
 		answer_dt: "",
-        answer_content: "",
-		id: ""
+        description: "",
+		id: "",
+		question_title: "",
     };
 	
 	$scope.submitAnswer = function() {
 		answer.askerid = "";
 		answer.imageUrl = "";
-		answer.snippet = "";
 		answer.answer_dt = "";
+		answer.question_title = $scope.question.title;
         var jsondata = $scope.answer ;
-        socket.emit('send:questions.question' , jsondata);
+		//保存到数据库
+        socket.emit('send:questions.question.answer' , jsondata);
+		//重新加载当前页面
+		location.reload();
     }
 
     socket.on('send:questions.question.res', function (data) {
         console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
          
         if(data.result === "ok"){
-            $scope.question = data.question;
-			//已记录的答案
-			$scope.answers = [
-				{     
-					"id": "answerid1", 
-					"imageUrl": "img/phones/motorola-xoom-with-wi-fi.0.jpg", 
-					"snippet": "I've looked at dozen cellForRowAtIndexPath:h", 
-					"tags": ["javascript","c++"],
-					"answer_time":"20s ago",
-					"answer_dt": "2014-1-1 07:07:07",
-					"answer_content": "use use this code to solve it",
-					"askerid":"chenliang"        
-				}, 
-				{        
-					"id": "answerid2", 
-					"imageUrl": "img/phones/motorola-xoom.0.jpg",     
-					"snippet": "angular.dfgdgh", 
-					"tags": ["javascript","c++"],
-					"answer_time":"20s ago",        
-					"answer_dt": "2014-1-1 07:07:07",
-					"answer_content": "use use this code to ttt solve it",
-					"askerid":"chenliang",                
-				},
-				{        
-					"id": "answerid3", 
-					"imageUrl": "img/phones/motorola-xoom.0.jpg",     
-					"snippet": "angular.dfgdgh", 
-					"tags": ["javascript","c++"],
-					"answer_time":"20s ago",        
-					"answer_dt": "2014-1-1 07:07:07",
-					"answer_content": "use use this code to ttt solve it",
-					"askerid":"chenliang",                
-				},
-				{        
-					"id": "answerid4", 
-					"imageUrl": "img/phones/motorola-xoom.0.jpg",     
-					"snippet": "angular.dfgdgh", 
-					"tags": ["javascript","c++"],
-					"answer_time":"20s ago",        
-					"answer_dt": "2014-1-1 07:07:07",
-					"answer_content": "use use this code to ttt solve it",
-					"askerid":"chenliang",                
-				}
-			];
+            $scope.question = data.question;			
         }else
             return;
 
