@@ -56,7 +56,12 @@ angular.module('nggl', ['ngCookies', 'ngRoute',  'ngDateTime'])
         {
             templateUrl:    '/partials/private.questions.question.html',
             controller:     'QuestionsDetailCtrl',
-            access:         access.user
+            access:         access.user,
+			resolve:        {
+                getTopData: function(getTopQuestionData){
+                    return getTopQuestionData(); 
+                }
+            }
         });       
     $routeProvider.when('/admin',
         {

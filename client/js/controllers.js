@@ -155,7 +155,7 @@ function($rootScope, $scope, $routeParams, $location, socket) {
         //保存到数据库
         socket.emit('send:questions.question.answer' , jsondata);
 		//重新加载当前页面
-
+		//location.reload();
 
     }
 
@@ -164,7 +164,9 @@ function($rootScope, $scope, $routeParams, $location, socket) {
          
         if(data.result === "ok"){
             $scope.question = data.question;			
-        }else
+        }else if(data.result === "reload"){
+			location.reload();
+		}else
             return;
 
     });
