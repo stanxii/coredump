@@ -207,8 +207,8 @@ MongoClient.connect('mongodb://127.0.0.1:27017/coredump', function(err, db) {
         }else if(action == "month"){
           
         }else if(action == "questions.insertanswer"){
-		
-		}
+		        
+		    }
 ///////////////////////////////////////case end
         
       
@@ -235,7 +235,7 @@ exports.questionsAction = function(socket) {
         });
 		
 		socket.on('send:questions.question.answer', function(data) {              
-              console.log("server send:questions.question rev:" + JSON.stringify(data));
+              console.log("server send:questions.answer rev:" + JSON.stringify(data));
               doMongodbOpt(socket, "questions.insertanswer",data);
               
 

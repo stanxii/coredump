@@ -141,25 +141,22 @@ function($rootScope, $scope, $routeParams, $location, socket) {
         }
     socket.emit('send:questions.question' , jsondata);
     
-    $scope.answer = {               
+    $scope.newanswer = {               
         askerid: "",
         imageUrl: "",
 		answer_dt: "",
-        description: "",
-		id: "",
-		question_title: "",
+        description: "",		
+		qid: $routeParams.qid,
     };
 	
-	$scope.submitAnswer = function() {
-		answer.askerid = "";
-		answer.imageUrl = "";
-		answer.answer_dt = "";
-		answer.question_title = $scope.question.title;
-        var jsondata = $scope.answer ;
-		//保存到数据库
+	$scope.submitAnswer = function() {			
+        var jsondata = $scope.newanswer ;
+		
+        //保存到数据库
         socket.emit('send:questions.question.answer' , jsondata);
 		//重新加载当前页面
-		location.reload();
+
+
     }
 
     socket.on('send:questions.question.res', function (data) {
