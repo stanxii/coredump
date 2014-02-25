@@ -98,15 +98,14 @@ angular.module('nggl')
 
 angular.module('nggl')
 .controller('QuestionsAskCtrl',
-[   '$rootScope', '$scope', '$location', 'socket', 
+[   '$rootScope', '$scope', '$location', 'socket',
 function($rootScope, $scope, $location, socket) {
 
 
-   
-
     $scope.question = {               
         title: "",
-        description: ""        
+        description: "",
+        answers: []        
     };
 
     $scope.askQuestion = function() {
@@ -123,7 +122,11 @@ function($rootScope, $scope, $location, socket) {
             return;
     });
 
-}]);
+}
+
+]);
+
+
 
 angular.module('nggl')
 .controller('QuestionsDetailCtrl',
@@ -221,7 +224,7 @@ function($rootScope, $scope, $location, socket) {
     console.log("now get top 100 questions  = ");
     $scope.userQuery = "*";
     var jsondata = {
-            qnum : 100,
+            qnum : 10,
             userQuery: $scope.userQuery
         }
     socket.emit('send:questions.top' , jsondata);

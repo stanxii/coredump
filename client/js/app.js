@@ -3,6 +3,8 @@
 angular.module('nggl', ['ngCookies', 'ngRoute',  'ngDateTime'])
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider, ngDateTime) {
 
+    
+
     var access = routingConfig.accessLevels;
 
 /*
@@ -43,7 +45,12 @@ angular.module('nggl', ['ngCookies', 'ngRoute',  'ngDateTime'])
         {
             templateUrl:    '/partials/private.questions.ask.html',
             controller:     'QuestionsAskCtrl',
-            access:         access.user
+            access:         access.user,
+            resolve:        {
+                getTopData: function(getTopQuestionData){
+                    return getTopQuestionData(); 
+                }
+            }
         });               
     $routeProvider.when('/questions/:qid',
         {

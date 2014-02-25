@@ -85,3 +85,24 @@ angular.module('nggl')
     }
   };
 });
+
+
+angular.module('nggl')
+.factory('getTopQuestionData', ['socket', '$route', '$q', function(socket, $route, $q){
+        return function(){
+            var delay = $q.defer(),
+            load = function(){
+                $.getScript('/lib/markdown/Markdown.Converter.js',function(){
+                    $.getScript('/lib/markdown/Markdown.Sanitizer.js',function(){
+                        $.getScript('/lib/markdown/Markdown.Editor.js',function(){
+                            delay.resolve();
+                        });
+                    });                
+                });
+            };
+            load();
+            return delay.promise;  
+        };
+    }]);
+
+

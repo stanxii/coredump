@@ -79,12 +79,13 @@ MongoClient.connect('mongodb://127.0.0.1:27017/coredump', function(err, db) {
           collection.insert(jsondata, function(err, doc) {
             // Locate all the entries using find
             if(err){
+              console.log(err);
               console.log(doc);
-              socket.emit('send:questions.ask.res', {"result": "failed"});
+              socket.emit('send:questions.ask.res', {"result": "failed"});             
             }else{
               console.log(doc);
               // Let's close the db              
-              db.close();          
+                       
 
               //save data into ES index server
               var elasticsearch = require('elasticsearch');
@@ -138,7 +139,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/coredump', function(err, db) {
 
           collection.findOne({_id: ObjectID.createFromHexString(jsondata.qid) }, function(err, document){
               if(err){
-                console.log("findone error");
+                console.log("findone error" + err);
                 var res ={result:"failed"};
                 socket.emit('send:questions.question.res', res);  
                 return;
