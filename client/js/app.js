@@ -19,7 +19,12 @@ angular.module('nggl', ['ngCookies', 'ngRoute',  'ngDateTime'])
         {
             templateUrl:    '/partials/private.questions.top.html',
             controller:     'QuestionsTopCtrl',
-            access:         access.user
+            access:         access.user,
+            resolve:        {
+                getTopData: function(getTopQuestionData){
+                    return getTopQuestionData(); 
+                }
+            }
         });    
 
 
@@ -47,8 +52,8 @@ angular.module('nggl', ['ngCookies', 'ngRoute',  'ngDateTime'])
             controller:     'QuestionsAskCtrl',
             access:         access.user,
             resolve:        {
-                getTopData: function(getTopQuestionData){
-                    return getTopQuestionData(); 
+                askGetMarkdown: function(askGetMarkdown){
+                    return askGetMarkdown(); 
                 }
             }
         });               

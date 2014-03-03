@@ -173,8 +173,8 @@ function($rootScope, $scope, $routeParams, $location, socket) {
 
 angular.module('nggl')
 .controller('QuestionsTopCtrl',
-[   '$rootScope', '$scope', '$location', 'socket', 
-function($rootScope, $scope, $location, socket) {
+[   '$rootScope', '$scope', '$http', '$location', 'socket', 
+function($rootScope, $scope, $http, $location, socket) {
 
     // $routeParams.qid
 
@@ -184,6 +184,9 @@ function($rootScope, $scope, $location, socket) {
             qnum : 10,
             userQuery: $scope.userQuery
         }
+    
+
+/*
     socket.emit('send:questions.top' , jsondata);
     
     $scope.questions = [];
@@ -191,6 +194,7 @@ function($rootScope, $scope, $location, socket) {
         title:"",
         description: ""
     }
+
 
     socket.on('send:questions.top.res', function (data) {
         //console.log("send:questions.top.res alarms list" + JSON.stringify(data));         
@@ -202,5 +206,29 @@ function($rootScope, $scope, $location, socket) {
             return;
 
     });
+
+*/
+
+    var url = '/top-questions';
+    var postCfg = {
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+               /* transformRequest: transFn*/
+            };
+    
+
+    //$http.post(url, jsondata, postCfg)
+    $http.post(url, jsondata)
+            .success(function(data, status){
+                if(data.result === "ok"){
+                    $scope.questions = data.questions;
+                    console.log("questions =" + $scope.questions);
+                }
+                else
+                    return;
+            })
+            .error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+            });
     
 }]);

@@ -56,3 +56,70 @@ var io = require('socket.io').listen(hserver);
 io.sockets.on('connection', socketioservice.socketioservice);
 
 require('./server/udpserver.js')(io);
+
+///////////////////////////////Elasticsearch search api
+
+
+var elasticsearch = require('elasticsearch');
+          
+          var client = new elasticsearch.Client({
+            host: 'localhost:9200',
+            log: 'trace'
+          });    
+
+
+var questionTopFun = function(httpres, result, jsondata){
+    // 主页 topest 100 question 
+          //按提问时间排序最近提问的100个问题
+          
+          var userQuery = {};
+
+          client.search({
+              index: 'questions',
+              type: 'question',                            
+              body: {                
+                  query: {
+                    match_all: {}
+                  } ,
+                  size: jsondata.qnum,                       
+              }
+            }, function (error, response) {
+              var res = {
+                  result:"ok",
+                  questions: ""
+                }
+
+              if (error) {
+                // handle error
+                res.result = "failed";                
+              }else{
+              	res.questions = response.hits.hits;
+              }
+              //console.log("now search result = " + JSON.stringify(response));
+                result = res;
+                console.log("result ES ==" + JSON.stringify(result));
+    			httpres.send(result);//给客户端返回一个json格式的数据
+    			httpres.end();
+                /*
+                var  searchres [];
+                for(int i= 0; i< response.hits.hits.length; i++ ){
+                    searchres.push
+                }
+                */
+            });
+};
+
+app.post('/top-questions', function(req, res, next) {
+    console.log(req.body);//请求中还有参数data,data的值为一个json字符串
+// var data= eval_r('(' + req.body.data + ')');//需要将json字符串转换为json对象
+// console.log("data="+data.PhoneNumber);
+    console.log(req.body.qnum);//解析json格式数据
+    res.contentType('json');//返回的数据类型
+
+    var data = req.body;
+    var result = {};
+
+    questionTopFun(res, result, data);
+
+    
+});

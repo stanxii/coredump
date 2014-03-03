@@ -88,7 +88,7 @@ angular.module('nggl')
 
 
 angular.module('nggl')
-.factory('getTopQuestionData', ['socket', '$route', '$q', function(socket, $route, $q){
+.factory('askGetMarkdown', ['socket', '$route', '$q', function(socket, $route, $q){
         return function(){
             var delay = $q.defer(),
             load = function(){
@@ -103,6 +103,36 @@ angular.module('nggl')
             load();
             return delay.promise;  
         };
-    }]);
+}]);
 
+angular.module('nggl')
+.factory('getTopQuestionData', ['socket', '$route', '$q', function(socket, $scope, $q){
+        return function(){
+            return;
+
+            
+            var delay = $q.defer(),
+            load = function(){
+                $scope.userQuery = "*";
+                var jsondata = {
+                        qnum : 10,
+                        userQuery: $scope.userQuery
+                    }
+                socket.emit('send:questions.top' , jsondata);
+                socket.on('send:questions.top.res', function (data) {
+                    //console.log("send:questions.top.res alarms list" + JSON.stringify(data));         
+                     
+                    if(data.result === "ok"){
+                        $scope.questions = data.questions;                        
+                        delay.resolve();
+                    }
+                    else
+                        delay.reject();                        
+                });
+                
+            };
+            load();
+            return delay.promise;  
+        };
+}]);
 
