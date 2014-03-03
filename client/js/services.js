@@ -106,30 +106,13 @@ angular.module('nggl')
 }]);
 
 angular.module('nggl')
-.factory('getTopQuestionData', ['socket', '$route', '$q', function(socket, $scope, $q){
+.factory('getTopQuestionCSS', ['socket', '$route', '$q', function(socket, $scope, $q){
         return function(){
-            return;
-
-            
             var delay = $q.defer(),
             load = function(){
-                $scope.userQuery = "*";
-                var jsondata = {
-                        qnum : 10,
-                        userQuery: $scope.userQuery
-                    }
-                socket.emit('send:questions.top' , jsondata);
-                socket.on('send:questions.top.res', function (data) {
-                    //console.log("send:questions.top.res alarms list" + JSON.stringify(data));         
-                     
-                    if(data.result === "ok"){
-                        $scope.questions = data.questions;                        
-                        delay.resolve();
-                    }
-                    else
-                        delay.reject();                        
+                $.getScript('/css/question.top.js',function(){                    
+                            delay.resolve();                                
                 });
-                
             };
             load();
             return delay.promise;  

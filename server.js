@@ -68,7 +68,7 @@ var elasticsearch = require('elasticsearch');
           });    
 
 
-var questionTopFun = function(httpres, result, jsondata){
+var questionTopFun = function(httpres,  jsondata){
     // 主页 topest 100 question 
           //按提问时间排序最近提问的100个问题
           
@@ -89,16 +89,24 @@ var questionTopFun = function(httpres, result, jsondata){
                   questions: ""
                 }
 
+              var result = [];
+                
               if (error) {
                 // handle error
                 res.result = "failed";                
               }else{
-              	res.questions = response.hits.hits;
+              	res.result = "ok"; 
+              	for(var i= 0; i< response.hits.hits.length; i++ ){
+                    result.push(response.hits.hits[i]._source);
+                }
+                res.questions = result;
               }
               //console.log("now search result = " + JSON.stringify(response));
-                result = res;
-                console.log("result ES ==" + JSON.stringify(result));
-    			httpres.send(result);//给客户端返回一个json格式的数据
+               
+
+
+                console.log("result ES ==" + JSON.stringify(res));
+    			httpres.send(res);//给客户端返回一个json格式的数据
     			httpres.end();
                 /*
                 var  searchres [];
@@ -117,9 +125,9 @@ app.post('/top-questions', function(req, res, next) {
     res.contentType('json');//返回的数据类型
 
     var data = req.body;
-    var result = {};
+    
 
-    questionTopFun(res, result, data);
+    questionTopFun(res, data);
 
     
 });
