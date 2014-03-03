@@ -207,8 +207,27 @@ MongoClient.connect('mongodb://127.0.0.1:27017/coredump', function(err, db) {
         }else if(action == "month"){
           
         }else if(action == "questions.insertanswer"){
-		        
-		    }
+			var collection = db.collection('questions');
+		    collection.findOne({_id: ObjectID.createFromHexString(jsondata.qid) }, function(err, document){
+              if(err){
+                console.log("findone error" + err);
+                var res ={result:"failed"};
+                socket.emit('send:questions.question.res', res);  
+                return;
+              }
+			  var jsonobj=eval(document.answers);  
+			  jsonobj[jsonobj.length] = jsondata;
+				console.log('-----jsondata--->>>'+ JSON.stringify(jsondata) +'-----------answers--->>>>>'+ JSON.stringify(document.answers));
+				collection.update({_id: ObjectID.createFromHexString(jsondata.qid)}, {$set:{answers:jsonobj}}, function(err) {
+					if (err) {console.warn(err.message);}
+					else{					  
+						var res ={result:"reload"};
+						socket.emit('send:questions.question.res', res);  
+						return;
+					 }
+				});
+            });
+		}
 ///////////////////////////////////////case end
         
       

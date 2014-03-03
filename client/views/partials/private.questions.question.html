@@ -12,7 +12,7 @@
 				</code>
 			</pre>
 			</br>
-			<label>{{answers.length}}个回答：</label>
+			<label>{{question.answers.length>0?question.answers.length:0}}个回答：</label>
 			<hr>
 			<div>				
 				<div ng-repeat="answer in question.answers">					
