@@ -117,7 +117,7 @@ function($rootScope, $scope, $location, socket) {
         console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
 
         if(data.result == "ok")
-            $location.path('/questions/' + data._id);
+            $location.path('/questions/' + data.id);
         else
             return;
     });
@@ -183,29 +183,9 @@ function($rootScope, $scope, $http, $location, socket) {
             userQuery: $scope.userQuery
         }
     
-
-/*
-    socket.emit('send:questions.top' , jsondata);
-    
-    $scope.questions = [];
-    var question = {
-        title:"",
-        description: ""
+     $scope.getQid = function(question) {
+        return question._id;
     }
-
-
-    socket.on('send:questions.top.res', function (data) {
-        //console.log("send:questions.top.res alarms list" + JSON.stringify(data));         
-         
-        if(data.result === "ok"){
-            $scope.questions = data.questions;
-        }
-        else
-            return;
-
-    });
-
-*/
 
     var url = '/top-questions';
     var postCfg = {

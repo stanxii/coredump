@@ -97,7 +97,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/coredump', function(err, db) {
               //get computer id number
               // index a document
               jsondata._id = jsondata._id.toHexString();
-              console.log("when index jsondata===" + jsondata);
+              console.log("when index jsondata===" + JSON.stringify(jsondata));
               
               //delete jsondata["_id"];
               //jsondata._id = 1;
@@ -110,7 +110,7 @@ MongoClient.connect('mongodb://127.0.0.1:27017/coredump', function(err, db) {
                 // ...
                 var res = {
                   result: "",
-                  _id: jsondata._id
+                  id: jsondata._id
                 }
                 if(error){
                   console.log("index the ES data failed");
