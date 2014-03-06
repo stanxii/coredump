@@ -54,3 +54,32 @@
 	margin: 10px 0px !important;
 }
 
+.meta-datetime{
+	margin-left: 30px;
+}
+
+.top-search{	
+	position: relative;
+	margin: 13px 15px;
+	width: 60%;
+}
+
+.top-logo{
+	width: 120px;
+	float: left;
+}
+
+#userInfo{
+	height: 50px;
+	color: #fff;
+}
+
+#allnav {
+	background-color: #f3f6f5;
+	display: inline-block;
+}
+
+#ask-button{
+	margin-top: 7px;
+}
+

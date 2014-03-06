@@ -81,7 +81,8 @@ var questionTopFun = function(httpres,  jsondata){
                   query: {
                     match_all: {}
                   } ,
-                  size: jsondata.qnum,                       
+                  size: jsondata.qnum,  
+				  sort: {"asktime":"desc"}
               }
             }, function (error, response) {
               var res = {

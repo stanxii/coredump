@@ -104,6 +104,7 @@ function($rootScope, $scope, $location, socket) {
 
     $scope.question = {               
         title: "",
+		tag: "",
         description: "",
         answers: []        
     };
