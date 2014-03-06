@@ -33,6 +33,11 @@
 	margin-left: 30px;
 }
 
+.tips-askerimg{
+	height:64px;
+	width:64px;
+}
+
 .meta-tags{
 	list-style-type: none;
 	display: inline;
@@ -58,28 +63,33 @@
 	margin-left: 30px;
 }
 
-.top-search{	
-	position: relative;
-	margin: 13px 15px;
-	width: 60%;
+.tips-navbar{
+	width:90%;
 }
 
-.top-logo{
-	width: 120px;
+.navbar-new{
 	float: left;
 }
 
-#userInfo{
-	height: 50px;
-	color: #fff;
+.tips-nav{
+	position: relative;
+	float: right;
+	margin-top: 30px;
 }
 
-#allnav {
-	background-color: #f3f6f5;
-	display: inline-block;
+.tips-nav a{
+	text-decoration: none;
+	margin-left: 5px;
 }
 
-#ask-button{
-	margin-top: 7px;
+.tips-nav a:hover{
+	background-color: green;
+	color: white;
+	text-decoration: none;
 }
 
+.tips-nav a.current{
+	background: 0;
+	color: #666;
+	text-decoration: none;
+}

@@ -134,6 +134,11 @@ blockquote {
 	float: left;
 }
 
+.answer-img{
+	height:40px;
+	width:40px;
+}
+
 #userInfo{
 	height: 50px;
 	color: #fff;

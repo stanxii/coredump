@@ -14,13 +14,15 @@ var users = [
         id:         1,
         username:   "user",
         password:   "123",
-        role:   userRoles.user
+        role:   userRoles.user,
+		urlimg: "/img/user.ico"
     },
     {
         id:         2,
         username:   "admin",
         password:   "123",
-        role:   userRoles.admin
+        role:   userRoles.admin,
+		urlimg: "/img/admin.ico"
     }
 ];
 
