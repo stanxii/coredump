@@ -213,3 +213,11 @@ function($rootScope, $scope, $http, $location, socket) {
             });
     
 }]);
+
+angular.module('nggl')
+.controller('QuestionsUserCtrl',
+[   '$rootScope', '$scope', '$http', '$location', 'socket', 'Auth',
+function($rootScope, $scope, $http, $location, socket, Auth) {
+	$scope.user = Auth.user;
+    
+}]);
