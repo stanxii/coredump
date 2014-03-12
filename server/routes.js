@@ -134,14 +134,16 @@ var routes = [
         path: '/*',
         httpMethod: 'GET',
         middleware: [function(req, res) {
-            var role = userRoles.public, username = '';
+            var role = userRoles.public, username = '', urlimg='/img/user-unknown.ico';
             if(req.user) {
                 role = req.user.role;
                 username = req.user.username;
+				urlimg = req.user.urlimg;
             }
             res.cookie('user', JSON.stringify({
                 'username': username,
-                'role': role
+                'role': role,
+				'urlimg': urlimg
             }));
             //res.render('index');
 			res.sendfile('client/views/index.html');

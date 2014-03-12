@@ -69,6 +69,12 @@ angular.module('nggl', ['ngCookies', 'ngRoute',  'ngDateTime'])
             controller:     'AdminCtrl',
             access:         access.admin
         });
+	$routeProvider.when('/users/:username',
+        {
+            templateUrl:    '/partials/private.users.user.html',
+            controller:     'QuestionsUserCtrl',
+            access:         access.user			
+        });
     $routeProvider.when('/404',
         {
             templateUrl:    '/partials/404.html',

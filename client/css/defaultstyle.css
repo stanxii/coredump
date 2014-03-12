@@ -122,3 +122,33 @@ blockquote {
 	font-size: 0.8em;
 	font-weight: bold;
 }
+
+.top-search{	
+	position: relative;
+	margin: 13px 15px;
+	width: 60%;
+}
+
+.top-logo{
+	width: 120px;
+	float: left;
+}
+
+.answer-img{
+	height:40px;
+	width:40px;
+}
+
+#userInfo{
+	height: 50px;
+	color: #fff;
+}
+
+#allnav {
+	background-color: #f3f6f5;
+	display: inline-block;
+}
+
+#ask-button{
+	margin-top: 7px;
+}

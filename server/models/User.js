@@ -7,20 +7,23 @@ var User
     , GoogleStrategy = require('passport-google').Strategy
     , LinkedInStrategy = require('passport-linkedin').Strategy
     , check =           require('validator').check
-    , userRoles =       require('../../client/js/routingConfig').userRoles;
+    , userRoles =       require('../../client/js/routingConfig').userRoles,
+	, userDao =       require('/models/UserDao');
 
 var users = [
     {
         id:         1,
         username:   "user",
         password:   "123",
-        role:   userRoles.user
+        role:   userRoles.user,
+		urlimg: "/img/user.ico"
     },
     {
         id:         2,
         username:   "admin",
         password:   "123",
-        role:   userRoles.admin
+        role:   userRoles.admin,
+		urlimg: "/img/admin.ico"
     }
 ];
 

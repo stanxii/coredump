@@ -98,17 +98,20 @@ angular.module('nggl')
 
 angular.module('nggl')
 .controller('QuestionsAskCtrl',
-[   '$rootScope', '$scope', '$location', 'socket',
-function($rootScope, $scope, $location, socket) {
+[   '$rootScope', '$scope', '$location', 'socket', 'Auth',
+function($rootScope, $scope, $location, socket, Auth) {
 
 
     $scope.question = {               
         title: "",
+		tag: "",
         description: "",
+		urlimg: "",
         answers: []        
     };
 
     $scope.askQuestion = function() {
+		$scope.question.urlimg = Auth.user.urlimg;
         var jsondata = $scope.question ;
         socket.emit('send:questions.ask' , jsondata);
     }
@@ -130,8 +133,8 @@ function($rootScope, $scope, $location, socket) {
 
 angular.module('nggl')
 .controller('QuestionsDetailCtrl',
-[   '$rootScope', '$scope', '$routeParams', '$location', 'socket', 
-function($rootScope, $scope, $routeParams, $location, socket) {
+[   '$rootScope', '$scope', '$routeParams', '$location', 'socket', 'Auth',
+function($rootScope, $scope, $routeParams, $location, socket, Auth) {
 
     // $routeParams.qid
 
@@ -143,7 +146,7 @@ function($rootScope, $scope, $routeParams, $location, socket) {
     
     $scope.newanswer = {               
         askerid: "",
-        imageUrl: "",
+        imageUrl: Auth.user.urlimg,
 		answer_dt: "",
         description: "",		
 		qid: $routeParams.qid,
@@ -208,5 +211,13 @@ function($rootScope, $scope, $http, $location, socket) {
                 $scope.data = data || "Request failed";
                 $scope.status = status;
             });
+    
+}]);
+
+angular.module('nggl')
+.controller('QuestionsUserCtrl',
+[   '$rootScope', '$scope', '$http', '$location', 'socket', 'Auth',
+function($rootScope, $scope, $http, $location, socket, Auth) {
+	$scope.user = Auth.user;
     
 }]);

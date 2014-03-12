@@ -208,25 +208,51 @@ MongoClient.connect('mongodb://127.0.0.1:27017/coredump', function(err, db) {
           
         }else if(action == "questions.insertanswer"){
 			var collection = db.collection('questions');
-		    collection.findOne({_id: ObjectID.createFromHexString(jsondata.qid) }, function(err, document){
-              if(err){
-                console.log("findone error" + err);
-                var res ={result:"failed"};
-                socket.emit('send:questions.question.res', res);  
-                return;
-              }
-			  var jsonobj=eval(document.answers);  
-			  jsonobj[jsonobj.length] = jsondata;
-				console.log('-----jsondata--->>>'+ JSON.stringify(jsondata) +'-----------answers--->>>>>'+ JSON.stringify(document.answers));
-				collection.update({_id: ObjectID.createFromHexString(jsondata.qid)}, {$set:{answers:jsonobj}}, function(err) {
-					if (err) {console.warn(err.message);}
-					else{					  
-						var res ={result:"reload"};
-						socket.emit('send:questions.question.res', res);  
-						return;
-					 }
-				});
-            });
+		    
+		  var jsonobj=eval(jsondata);  
+		  //jsonobj[jsonobj.length] = jsondata;
+			//console.log('-----jsondata--->>>'+ JSON.stringify(jsondata) +'-----------answers--->>>>>'+ JSON.stringify(document.answers));
+			collection.update({_id: ObjectID.createFromHexString(jsondata.qid)}, {$push:{answers:jsonobj}}, function(err) {
+				if (err) {console.warn(err.message);}
+				else{					  
+					var res ={result:"reload"};
+					socket.emit('send:questions.question.res', res);  
+					//更新elasticsearch
+					var elasticsearch = require('elasticsearch');
+					  var client = new elasticsearch.Client({
+						host: 'localhost:9200',
+						log: 'trace'
+					  });
+					client.update({
+						index: 'questions',
+						type: 'question', 
+						id: jsondata.qid,               
+						body: {
+							"script" : "ctx._source.answers += answer",
+							params: {answer: jsondata}
+						}
+					  }, function (error, response) {
+						// ...
+						var res = {
+						  result: "",
+						  id: jsondata.qid
+						}
+						if(error){
+						  console.log("index the ES data failed");
+						  res.result = "failed";
+						  socket.emit('send:questions.ask.res', res);          
+						}else{
+						  console.log("index the ES data ok");
+						  res.result = "ok";                                  
+						  socket.emit('send:questions.ask.res', res);  
+						}
+
+						client.close();
+
+					  });
+					return;
+				 }
+			});
 		}
 ///////////////////////////////////////case end
         
