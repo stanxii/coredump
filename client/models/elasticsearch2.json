@@ -7,8 +7,13 @@ PUT /badges/
                 "name": {
                     "type": "string",
                     "index": "not_analyzed"
-                },
-                "img": {
+                },                
+                "description": {
+                    "type": "string",
+                    "index_analyzer": "index_ansj",
+                    "search_analyzer": "query_ansj"                    
+                },   
+                "imgurl": {
                     "type": "string",
                     "index": "not_analyzed"
                 },
@@ -16,11 +21,10 @@ PUT /badges/
                     "type": "string",
                     "index": "not_analyzed"
                 },
-                "description": {
+                "rating": {
                     "type": "string",
-                    "index_analyzer": "index_ansj",
-                    "search_analyzer": "query_ansj"                    
-                }          
+                    "index": "not_analyzed"
+                }       
             }
         }
     }
@@ -28,9 +32,128 @@ PUT /badges/
 
 POST /badges/_bulk
 {"index":{"_index":"badges","_type":"badge"}}
-{"name":"Michael", "birthdate":"1989-10-1", "sport":"Baseball", "rating": ["5", "4"],  "location":"46.22,-68.45"}
-{"index":{"_index":"sports","_type":"athlete"}}
-{"name":"Bob", "birthdate":"1989-11-2", "sport":"Baseball", "rating": ["3", "4"],  "location":"45.21,-68.35"}
+{"name":"无私者", "description":"第一次手动给别人的问题发荣誉奖金, 将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"恩人啊", "description":"第一次手动给自己的问题发荣誉奖金, 将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"投资者", "description":"第一次对别人的问题出价荣誉奖金", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"好问题", "description":"获得10次以上赞的问题，将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"热门问题", "description":"被看过1000次以上的问题，将获得该徽章。", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"推销者", "description":"第一次对自己的问题出价荣誉奖金。", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"学生", "description":"当提问第一次得到他人的点赞，获得1个以上荣誉奖金，将获得该徽章。", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"学者", "description":"当第一次采纳他人的答案后，你将获得此徽章。问题解决后采纳最佳答案是一个良好的习惯，这不仅是对回答者的一种鼓励，也可以帮助后来者更快解决问题", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"小人物", "description":"提出的问题，一周内没有投票、没有回答、没有评论，也没有几个人看……小人物", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"受欢迎问题", "description":"被25个以上用户收藏过的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"优秀问题", "description":"获得25次以上赞的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"火爆问题", "description":"被看过2500次以上的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"五星级问题", "description":"被100个用户收藏过的问题, 将获得该金质徽章.", "imgurl":"", "cat":"question", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"伟大问题", "description":"获得100次以上赞的问题， 将获得金质徽章!", "imgurl":"", "cat":"question", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"超火爆问题", "description":"被看过10000次以上的问题，将获得金质徽章!", "imgurl":"", "cat":"question", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"好答案", "description":"答案获得10次以上的赞同，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"复活答案", "description":"回答30多天后，第一次获得2个荣誉奖金，点赞的答案。", "imgurl":"", "cat":"answer", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"老师", "description":"第一次回答问题，并获得1个以上点赞，获得该徽章", "imgurl":"", "cat":"answer", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"有识之士", "description":"第一次回答问题，并获得10个以上点赞，获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"多面手", "description":"提供答案总分排名15名以内，在前20到40个标签中，将获得该徽章.", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"高手", "description":"被认可答案超过40赞以上的，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"优秀答案", "description":"答案获得25次以上的赞同，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"巫师", "description":"回答问题超过60天以上，并获得5个赞，将获得该徽章.", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"顽强答案", "description":"5%-20% 接受的答案都是0个赞，真够顽强的！.", "imgurl":"", "cat":"questions", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"伟大答案", "description":"答案获得100次以上的赞同，将获得该徽章.", "imgurl":"", "cat":"questions", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"逆转者", "description":"提供答案获得20个赞道-5个赞.", "imgurl":"", "cat":"questions", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"无名英雄", "description":"总数10%-25%接受答案，但获得0个赞.", "imgurl":"", "cat":"questions", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"初出茅庐", "description":"在网站上的第一次提问完成后，将获得该徽章。这是融入社区的第一步，希望再接再厉。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"小试牛刀", "description":"在网站上的第一次回答完成后，将获得该徽章。也是你帮助别人的开始.", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"自传作者", "description":"完全填写完用户配置字段，将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"会议", "description":"参观选举在选举过程中的任何阶段，有足够的信誉投票", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"评论员", "description":"发表10个以上注释", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"学位帽", "description":"获得至少200赞在一天之内。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"预知的", "description":"Followed 51个建议的，在进入提交阶段前。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"法定人数", "description":"发表1个2分的元数据", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"健谈的", "description":"在聊天室中，发表10个消息，至少一个是发起聊天者", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"选民", "description":"投票在选举的最后阶段的候选人 将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"博学多才", "description":"提过10个以上获得5个赞以上的注释，将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"爱好者", "description":"每天获得200荣誉奖金，超过20次以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"公测", "description":"活跃的参与私有公测获得。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"公约", "description":"发布10个以上在元数据并获得2分以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"直言不讳", "description":"在聊天室同10个以上用户聊天10次以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"周年", "description":"一年内活跃用户，获得至少200个赞以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"狂热者", "description":"连续100天以上，每天访问网站，将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"传奇", "description":"每天获得200荣誉奖金，超过100次以上。", "imgurl":"", "cat":"participation ", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"宣告者", "description":"分享问题连接，并有25个以上独立ip访问，将获得该徽章.", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"助推器", "description":"分享问题连接，并有300个以上独立ip访问，将获得该徽章.", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge"}}
+{"name":"公关家", "description":"分享问题连接，并有1000个以上独立ip访问，将获得该徽章.", "imgurl":"", "cat":"participation ", "rating": "gold"}
+
+POST /badges/badge/_search
+{
+    "query" : {
+        "term" : { "cat" : "answer" }
+    },
+    "sort": [
+       {
+          "rating": {
+             "order": "desc"
+          }
+       }
+    ]
+}
+
+POST /badges/badge/_search
+{
+   "size": 0, 
+   "aggregations": {
+      "the_cat": {
+         "terms": {
+            "field": "cat"            
+         }
+      }
+   }
+}
+
 
 DELETE /users/
 
@@ -201,6 +324,8 @@ POST /sports/_bulk
 {"name":"Brady", "birthdate":"1988-3-1", "sport":"Football", "rating": ["10", "10"], "location":"46.25,-68.55" }
 {"index":{"_index":"sports","_type":"athlete"}}
 {"name":"Lewis", "birthdate":"1988-3-1", "sport":"Football", "rating": ["10", "10"], "location":"46.25,-68.55" }
+
+
 
 POST /sports/athlete/_search
 {
