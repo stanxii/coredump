@@ -7,8 +7,7 @@ var User
     , GoogleStrategy = require('passport-google').Strategy
     , LinkedInStrategy = require('passport-linkedin').Strategy
     , check =           require('validator').check
-    , userRoles =       require('../../client/js/routingConfig').userRoles,
-	, userDao =       require('/models/UserDao');
+    , userRoles =       require('../../client/js/routingConfig').userRoles;
 
 var users = [
     {
