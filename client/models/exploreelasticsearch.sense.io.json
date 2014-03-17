@@ -1,0 +1,41 @@
+explore elasticsearch  with sense.io
+
+DELETE /movie_db
+
+PUT /movie_db 
+{"mappings": {"movie": {"properties": {"title": {"type": "string", "analyzer": "snowball"}, "actors": {"type": "string", "position_offset_gap" : 100, "analyzer": "standard"}, "genre": {"type": "string", "index": "not_analyzed"}, "release_year": {"type": "integer", "index": "not_analyzed"}, "description": {"type": "string", "analyzer": "snowball"}}}}}
+
+POST /movie_db/_bulk
+{"index":{"_index":"movie_db","_type":"movie", _id:1}}
+{"_id": 1, "title": "Hackers", "release_year": 1995, "genre": ["Action", "Crime", "Drama"], "actors": ["Johnny Lee Miller", "Angelina Jolie"], "description": "High-school age computer expert Zero Cool and his hacker friends take on an evil corporation's computer virus with their hacking skills."}
+{"index":{"_index":"movie_db","_type":"movie",_id:2}}
+{"_id": 2, "title": "Johnny Mnemonic", "release_year": 1995, "genre": ["Science Fiction", "Action"], "actors": ["Keanu Reeves", "Dolph Lundgren"], "description": "A guy with a chip in his head shouts incomprehensibly about room service in this dystopian vision of our future."}
+{"index":{"_index":"movie_db","_type":"movie",_id:3}}
+{"_id": 3, "title": "Swordfish", "release_year": 2001, "genre": ["Action", "Crime"], "actors": ["John Travolta", "Hugh Jackman", "Halle Berry"], "description": "A cast of characters challenge society's commonly held view that computer experts are not the beautiful people. Somehow, the CIA is hacked in under 5 minutes."}
+{"index":{"_index":"movie_db","_type":"movie",_id:4}}
+{"_id": 4, "title": "Tomb Raider", "release_year": 2001, "genre": ["Adventure", "Action", "Fantasy"], "actors": ["Angelina Jolie", "Jon Voigt"], "description": "The story of a girl and her quest for antiquities in the face of adversity. This epic is adapter from its traditional video-game format to the big screen"}
+
+POST /movie_db/_search
+{
+   "query": {
+      "match_all": {}
+   }
+}
+
+GET /_status
+
+POST /_analyze?analyzer=snowball
+{"Rollerblades"}
+
+POST /movie_db/_search?pretty=true
+
+
+POST /movie_db/movie/_search?pretty=true
+{
+    "size": 200, 
+    "query": {
+        "match_all": {}
+    }
+}
+
+
