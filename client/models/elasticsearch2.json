@@ -1,9 +1,14 @@
 DELETE /badges/
+
 PUT /badges/
 {
     "mappings": {
         "badge": {            
             "properties": {
+               "_id": {
+                    "type": "long",
+                    "index": "not_analyzed"
+                },      
                 "name": {
                     "type": "string",
                     "index": "not_analyzed"
@@ -31,103 +36,119 @@ PUT /badges/
 }
 
 POST /badges/_bulk
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"无私者", "description":"第一次手动给别人的问题发荣誉奖金, 将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"恩人啊", "description":"第一次手动给自己的问题发荣誉奖金, 将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"投资者", "description":"第一次对别人的问题出价荣誉奖金", "imgurl":"", "cat":"question", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"好问题", "description":"获得10次以上赞的问题，将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"热门问题", "description":"被看过1000次以上的问题，将获得该徽章。", "imgurl":"", "cat":"question", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"推销者", "description":"第一次对自己的问题出价荣誉奖金。", "imgurl":"", "cat":"question", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"学生", "description":"当提问第一次得到他人的点赞，获得1个以上荣誉奖金，将获得该徽章。", "imgurl":"", "cat":"question", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"学者", "description":"当第一次采纳他人的答案后，你将获得此徽章。问题解决后采纳最佳答案是一个良好的习惯，这不仅是对回答者的一种鼓励，也可以帮助后来者更快解决问题", "imgurl":"", "cat":"question", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"小人物", "description":"提出的问题，一周内没有投票、没有回答、没有评论，也没有几个人看……小人物", "imgurl":"", "cat":"question", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"受欢迎问题", "description":"被25个以上用户收藏过的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"优秀问题", "description":"获得25次以上赞的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"火爆问题", "description":"被看过2500次以上的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"五星级问题", "description":"被100个用户收藏过的问题, 将获得该金质徽章.", "imgurl":"", "cat":"question", "rating": "gold"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"伟大问题", "description":"获得100次以上赞的问题， 将获得金质徽章!", "imgurl":"", "cat":"question", "rating": "gold"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"超火爆问题", "description":"被看过10000次以上的问题，将获得金质徽章!", "imgurl":"", "cat":"question", "rating": "gold"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"好答案", "description":"答案获得10次以上的赞同，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"复活答案", "description":"回答30多天后，第一次获得2个荣誉奖金，点赞的答案。", "imgurl":"", "cat":"answer", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"老师", "description":"第一次回答问题，并获得1个以上点赞，获得该徽章", "imgurl":"", "cat":"answer", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"有识之士", "description":"第一次回答问题，并获得10个以上点赞，获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"多面手", "description":"提供答案总分排名15名以内，在前20到40个标签中，将获得该徽章.", "imgurl":"", "cat":"answer", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"高手", "description":"被认可答案超过40赞以上的，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"优秀答案", "description":"答案获得25次以上的赞同，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"巫师", "description":"回答问题超过60天以上，并获得5个赞，将获得该徽章.", "imgurl":"", "cat":"answer", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"顽强答案", "description":"5%-20% 接受的答案都是0个赞，真够顽强的！.", "imgurl":"", "cat":"questions", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"伟大答案", "description":"答案获得100次以上的赞同，将获得该徽章.", "imgurl":"", "cat":"questions", "rating": "gold"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"逆转者", "description":"提供答案获得20个赞道-5个赞.", "imgurl":"", "cat":"questions", "rating": "gold"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"无名英雄", "description":"总数10%-25%接受答案，但获得0个赞.", "imgurl":"", "cat":"questions", "rating": "gold"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"初出茅庐", "description":"在网站上的第一次提问完成后，将获得该徽章。这是融入社区的第一步，希望再接再厉。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"小试牛刀", "description":"在网站上的第一次回答完成后，将获得该徽章。也是你帮助别人的开始.", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"自传作者", "description":"完全填写完用户配置字段，将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"会议", "description":"参观选举在选举过程中的任何阶段，有足够的信誉投票", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"评论员", "description":"发表10个以上注释", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"学位帽", "description":"获得至少200赞在一天之内。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"预知的", "description":"Followed 51个建议的，在进入提交阶段前。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"法定人数", "description":"发表1个2分的元数据", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"健谈的", "description":"在聊天室中，发表10个消息，至少一个是发起聊天者", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"选民", "description":"投票在选举的最后阶段的候选人 将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"博学多才", "description":"提过10个以上获得5个赞以上的注释，将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"爱好者", "description":"每天获得200荣誉奖金，超过20次以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"公测", "description":"活跃的参与私有公测获得。", "imgurl":"", "cat":"participation ", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"公约", "description":"发布10个以上在元数据并获得2分以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"直言不讳", "description":"在聊天室同10个以上用户聊天10次以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"周年", "description":"一年内活跃用户，获得至少200个赞以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"狂热者", "description":"连续100天以上，每天访问网站，将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "gold"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"传奇", "description":"每天获得200荣誉奖金，超过100次以上。", "imgurl":"", "cat":"participation ", "rating": "gold"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"宣告者", "description":"分享问题连接，并有25个以上独立ip访问，将获得该徽章.", "imgurl":"", "cat":"participation ", "rating": "bronze"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"助推器", "description":"分享问题连接，并有300个以上独立ip访问，将获得该徽章.", "imgurl":"", "cat":"participation ", "rating": "silver"}
-{"index":{"_index":"badges","_type":"badge"}}
-{"name":"公关家", "description":"分享问题连接，并有1000个以上独立ip访问，将获得该徽章.", "imgurl":"", "cat":"participation ", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge","_id":"1"}}
+{"_id":1, "name":"无私者", "description":"第一次手动给别人的问题发荣誉奖金, 将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"2"}}
+{"_id":2, "name":"恩人啊", "description":"第一次手动给自己的问题发荣誉奖金, 将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"3"}}
+{"_id":3, "name":"投资者", "description":"第一次对别人的问题出价荣誉奖金", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"4"}}
+{"_id":4, "name":"好问题", "description":"获得10次以上赞的问题，将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"5"}}
+{"_id":5, "name":"热门问题", "description":"被看过1000次以上的问题，将获得该徽章。", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"6"}}
+{"_id":6, "name":"推销者", "description":"第一次对自己的问题出价荣誉奖金。", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"7"}}
+{"_id":7, "name":"学生", "description":"当提问第一次得到他人的点赞，获得1个以上荣誉奖金，将获得该徽章。", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"8"}}
+{"_id":8, "name":"学者", "description":"当第一次采纳他人的答案后，你将获得此徽章。问题解决后采纳最佳答案是一个良好的习惯，这不仅是对回答者的一种鼓励，也可以帮助后来者更快解决问题", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"9"}}
+{"_id":9, "name":"小人物", "description":"提出的问题，一周内没有投票、没有回答、没有评论，也没有几个人看……小人物", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"10"}}
+{"_id":10, "name":"受欢迎问题", "description":"被25个以上用户收藏过的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"11"}}
+{"_id":11, "name":"优秀问题", "description":"获得25次以上赞的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"12"}}
+{"_id":12, "name":"火爆问题", "description":"被看过2500次以上的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"13"}}
+{"_id":13, "name":"五星级问题", "description":"被100个用户收藏过的问题, 将获得该金质徽章.", "imgurl":"", "cat":"question", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge","_id":"14"}}
+{"_id":14, "name":"伟大问题", "description":"获得100次以上赞的问题， 将获得金质徽章!", "imgurl":"", "cat":"question", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge","_id":"15"}}
+{"_id":15, "name":"超火爆问题", "description":"被看过10000次以上的问题，将获得金质徽章!", "imgurl":"", "cat":"question", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge","_id":"16"}}
+{"_id":16, "name":"好答案", "description":"答案获得10次以上的赞同，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"17"}}
+{"_id":17, "name":"复活答案", "description":"回答30多天后，第一次获得2个荣誉奖金，点赞的答案。", "imgurl":"", "cat":"answer", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"18"}}
+{"_id":18, "name":"老师", "description":"第一次回答问题，并获得1个以上点赞，获得该徽章", "imgurl":"", "cat":"answer", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"19"}}
+{"_id":19, "name":"有识之士", "description":"第一次回答问题，并获得10个以上点赞，获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"20"}}
+{"_id":20, "name":"多面手", "description":"提供答案总分排名15名以内，在前20到40个标签中，将获得该徽章.", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"21"}}
+{"_id":21, "name":"高手", "description":"被认可答案超过40赞以上的，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"22"}}
+{"_id":22, "name":"优秀答案", "description":"答案获得25次以上的赞同，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"23"}}
+{"_id":23, "name":"巫师", "description":"回答问题超过60天以上，并获得5个赞，将获得该徽章.", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"24"}}
+{"_id":24, "name":"顽强答案", "description":"5%-20% 接受的答案都是0个赞，真够顽强的！.", "imgurl":"", "cat":"questions", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"25"}}
+{"_id":25, "name":"伟大答案", "description":"答案获得100次以上的赞同，将获得该徽章.", "imgurl":"", "cat":"questions", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge","_id":"26"}}
+{"_id":26, "name":"逆转者", "description":"提供答案获得20个赞道-5个赞.", "imgurl":"", "cat":"questions", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge","_id":"27"}}
+{"_id":27, "name":"无名英雄", "description":"总数10%-25%接受答案，但获得0个赞.", "imgurl":"", "cat":"questions", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge","_id":"28"}}
+{"_id":28, "name":"初出茅庐", "description":"在网站上的第一次提问完成后，将获得该徽章。这是融入社区的第一步，希望再接再厉。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"29"}}
+{"_id":29, "name":"小试牛刀", "description":"在网站上的第一次回答完成后，将获得该徽章。也是你帮助别人的开始.", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"30"}}
+{"_id":30, "name":"自传作者", "description":"完全填写完用户配置字段，将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"31"}}
+{"_id":31, "name":"会议", "description":"参观选举在选举过程中的任何阶段，有足够的信誉投票", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"32"}}
+{"_id":32, "name":"评论员", "description":"发表10个以上注释", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"33"}}
+{"_id":33, "name":"学位帽", "description":"获得至少200赞在一天之内。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"34"}}
+{"_id":34, "name":"预知的", "description":"Followed 51个建议的，在进入提交阶段前。", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"35"}}
+{"_id":35, "name":"法定人数", "description":"发表1个2分的元数据", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"36"}}
+{"_id":36, "name":"健谈的", "description":"在聊天室中，发表10个消息，至少一个是发起聊天者", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"37"}}
+{"_id":37, "name":"选民", "description":"投票在选举的最后阶段的候选人 将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"38"}}
+{"_id":38, "name":"博学多才", "description":"提过10个以上获得5个赞以上的注释，将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"39"}}
+{"_id":39, "name":"爱好者", "description":"每天获得200荣誉奖金，超过20次以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"40"}}
+{"_id":40, "name":"公测", "description":"活跃的参与私有公测获得。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"41"}}
+{"_id":41, "name":"公约", "description":"发布10个以上在元数据并获得2分以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"42"}}
+{"_id":42, "name":"直言不讳", "description":"在聊天室同10个以上用户聊天10次以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"43"}}
+{"_id":43, "name":"周年", "description":"一年内活跃用户，获得至少200个赞以上。", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"44"}}
+{"_id":44, "name":"狂热者", "description":"连续100天以上，每天访问网站，将获得该徽章。", "imgurl":"", "cat":"participation ", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge","_id":"45"}}
+{"_id":45, "name":"传奇", "description":"每天获得200荣誉奖金，超过100次以上。", "imgurl":"", "cat":"participation ", "rating": "gold"}
+{"index":{"_index":"badges","_type":"badge","_id":"46"}}
+{"_id":46, "name":"宣告者", "description":"分享问题连接，并有25个以上独立ip访问，将获得该徽章.", "imgurl":"", "cat":"participation ", "rating": "bronze"}
+{"index":{"_index":"badges","_type":"badge","_id":"47"}}
+{"_id":47, "name":"助推器", "description":"分享问题连接，并有300个以上独立ip访问，将获得该徽章.", "imgurl":"", "cat":"participation ", "rating": "silver"}
+{"index":{"_index":"badges","_type":"badge","_id":"48"}}
+{"_id":48, "name":"公关家", "description":"分享问题连接，并有1000个以上独立ip访问，将获得该徽章.", "imgurl":"", "cat":"participation ", "rating": "gold"}
 
+POST /badges/badge/_search
+{
+    "size": 200, 
+   "query": {
+      "match_all": {}
+   },
+   "sort": [
+      {
+         "cat": {
+            "order": "asc"
+         }
+      }
+   ]
+   
+}
+    
 POST /badges/badge/_search
 {
     "query" : {
@@ -155,6 +176,62 @@ POST /badges/badge/_search
 }
 
 
+DELETE /tags/
+
+PUT /tags/
+{
+    "mappings": {
+        "tag": {            
+            "properties": {
+               "_id": {
+                  "type": "long",
+                  "index": "not_analyzed"
+               },               
+               "imgurl": {
+                  "type": "string",
+                  "index": "not_analyzed"
+                },
+                "name": {
+                  "type": "string",
+                  "index": "not_analyzed"
+                },
+                "name_analyzed": {
+                  "type": "string"                 
+                },
+                "alias": {
+                  "type": "string",
+                  "index": "not_analyzed"
+                },                
+                "description": {
+                  "type": "string",
+                  "index": "not_analyzed"
+                },
+                "info": {
+                     "type": "string",
+                     "index": "not_analyzed"                              
+                }             
+            }
+        }
+    }
+}
+
+POST /tags/_bulk
+{"index":{"_index":"tags","_type":"tag","_id":"1"}}
+{"_id": 1, "imgurl":"", "name":"c", "name_analyzed":"c", "alias":["c语言", "标准C"], "description":"C语言，是一种通用的、过程式的编程语言，广泛用于系统与应用软件的开发。具有高效、灵活、功能丰富、表达力强和较高的移植性等特点，在程序员中备受青睐.C语言是由UNIX的研制者丹尼斯·里奇（Dennis Ritchie）和肯·汤普逊（Ken Thompson）于1970年研制出的B语言的基础上发展和完善起来的。目前，C语言编译器普遍存在于各种不同的操作系统中，例如UNIX、MS-DOS、Microsoft Windows及Linux等。C语言的设计影响了许多后来的编程语言，例如C++、Objective-C、Java、C#等","info":"c info"} 
+{"index":{"_index":"tags","_type":"tag","_id":"2"}}
+{"_id": 2, "imgurl":"", "name":"android", "name_analyzed":"android",  "alias":["安卓", "安致"], "description":"Android（安卓或安致）是一种以 Linux 为基础的开放源码操作系统，主要使用于便携设备。2005 年由 Google 收购注资，并拉拢多家制造商组成开放手机联盟开发改良，逐渐扩展到到平板电脑及其他领域上。简介　Android一词的本义指“机器人”，同时也是Google于2007年11月5日宣布的基于Linux平台的开源手机操作系统的名称，该平台由操作系统、中间件、用户界面和应用软件组成。系统架构android的系统架构和其操作系统一样，采用了分层的架构。从架构图看，android分为四个层，从高层到低层分别是应用程序层、应用程序框架层、系统运行库层和linux核心层","info":"android info"}
+{"index":{"_index":"tags","_type":"tag","_id":"3"}}
+{"_id": "3", "imgurl":"", "name":"ios",  "alias":["苹果操作系统", "iOS"], "description":"OS 是苹果公司为其移动产品开发的操作系统。它主要给 iPhone、iPod touch、iPad 以及 AppleTV\r\n使用。原本这个系统名为 iPhone OS，直到2010年6月7日 WWDC大会上宣布改名为 iOS.系统结构　iOS的系统结构分为以下四个层次 核心操作系统（the Core OS layer），核心服务层（the CoreServiceslayer），媒体层（the Media layer），Cocoa 触摸框架层（the CocoaTouch layer）。\r\n发展历史\r\niOS最早于2007年1月9日的苹果Macworld展览会上公布，随后于同年的6月发布的第一版iOS操作系统，当初的名称为“iPhone 运行 OS X”。最初，由于没有人了解“iPhone 运行 OS X”的潜在价值和发展前景，导致没有一家软件公司、没有一个软件开发者给“iPhone 运行 OS X”开发软件或者提供软件支持。于是，苹果公司时任CEO斯蒂夫.乔布斯说服各大软件公司以及开发者可以先搭建低成本的网络应用程序（WEB APP）来使得它们能像iPhone的本地化程序一样来测试“iPhone runs OS X”平台。\r\n2007年10月17日，苹果公司发布了第一个本地化IPhone应用程序开发包（SDK），并且计划在2月发送到每个开发者以及开发商手中。\r\n2008年3月6日，苹果发布了第一个测试版开发包，并且将“iPhone runs OS X”改名为”iPhoneOS“。\r\n2010年2月27日，苹果公司发布iPad，iPad同样搭载了”iPhone OS”。这年，苹果公司重新设计了“iPhone OS”的系统结构和自带程序。\r\n2010年6月，苹果公司将“iPhone OS”改名为“iOS”，同时还获得了思科iOS的名称授权。\r\n2010年第四季度，苹果公司的iOS占据了全球智能手机操作系统26%的市场份额。2011年10月4日，苹果公司宣布iOS平台的应用程序已经突破50万个。2012年2月，应用总量达到552,247个，其中游戏应用最多，达到95,324个，比重为17.26%;书籍类以60,604个排在第二，比重为10.97%;娱乐应用排在第三，总量为56,998个，比重为10.32%。2012年6月，苹果公司在WWDC 2012 上宣布了iOS 6，提供了超过 200 项新功能。","info": "ios info"}
+
+POST /tags/tag/_search
+{
+   "query": {
+      "match_all": {}
+   }
+}
+
+
+
 DELETE /users/
 
 PUT /users/
@@ -162,6 +239,10 @@ PUT /users/
     "mappings": {
         "user":  {            
             "properties": {
+               "_id": {
+                  "type": "long",
+                  "index": "not_analyzed"
+               },  
                 "name": {
                     "type": "string",
                     "index_analyzer": "index_ansj",
@@ -185,7 +266,15 @@ PUT /users/
                  "badges": {
                     "type": "long",
                     "index": "not_analyzed"
-                },            
+                },                
+                "followertags": {
+                   "type": "long",
+                   "index": "not_analyzed"
+                },
+                "followerusers": {
+                   "type": "long",
+                   "index": "not_analyzed"
+                },              
                 "repupation": {
                    "type": "long",
                    "index": "not_analyzed"
@@ -199,54 +288,40 @@ PUT /users/
 }
 
 POST /users/_bulk
-{"index":{"_index":"users","_type":"user"}}
-{"name":"奚玉玺", "username": "Stan", "email": "stanhangzhou@qq.com", "password":"888888", "createdate":"2014-01-03T08:08:08",  "badges": [1, 3], "repupation": 1, "location":"46.22,-68.45"}
-{"index":{"_index":"users","_type":"user"}}
-{"name":"陈亮",  "username": "Frank", "email": "stanhangzhou@qq.com", "password":"888888", "createdate":"2014-01-03T08:08:08",  "badges": [1, 3], "repupation": 1, "location":"46.22,-68.45"}
+{"index":{"_index":"users","_type":"user","_id":"1"}}
+{"_id":1, "name":"倪新龙",  "username": "nixinlong", "email": "may125@163.com", "password":"888888", "createdate":"2014-01-03T08:08:08", "badges": [1, 3], "followertags":[1,3], "followerusers":[1,3], "repupation": 100, "location":"46.22,-68.45"}
+{"index":{"_index":"users","_type":"user","_id":"2"}}
+{"_id":2, "name":"奚玉玺", "username": "stanhangzhou", "email": "stanhangzhou@qq.com", "password":"888888", "createdate":"2014-01-03T08:08:08",  "badges": [2, 3], "followertags":[2,3], "followerusers":[2,3], "repupation": 50, "location":"46.22,-68.45"}
+{"index":{"_index":"users","_type":"user","_id":"3"}}
+{"_id":3, "name":"陈亮",  "username": "frank", "email": "frank@126.com", "password":"888888", "createdate":"2014-01-03T08:08:08",  "badges": [2, 5,9],  "followertags":[1,2],"followerusers":[1,2], "repupation": 250, "location":"46.22,-68.45"}
 
-DELETE /tags/
-
-PUT /tags/
+POST /users/user/_search
 {
-    "mappings": {
-        "tag": {            
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "description": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
-                "creater": {
-                    "type": "long"
-                },
-                "followers": {
-                   "type": "long",
-                   "index": "not_analyzed"
-                }                
-            }
-        }
-    }
+    "size": 200, 
+   "query": {
+      "match_all": {}
+   },
+   "sort": [
+      {
+         "username": {
+            "order": "desc"
+         }
+      }
+   ]
 }
 
-POST /tags/_bulk
-{"index":{"_index":"tags","_type":"tag"}}
-{"name":"c", "description":"c langguare is c lanurage", "creater":1,  "createdate":"2014-01-03T08:08:08",  "follwers": [1, 3]}
-{"name":"java", "description":"c langguare is c lanurage", "creater":1,  "createdate":"2014-01-03T08:08:08",  "follwers": [1, 3]}
-{"name":"iOS", "description":"c langguare is c lanurage", "creater":1,  "createdate":"2014-01-03T08:08:08",  "follwers": [1, 3]}
 
 DELETE /questions/ 
 
 PUT /questions/
 {
-   "mappings": {
-        "_parent" : {
-            "type" : "tag"
-            },
-        "question": {
+   "mappings": {        
+        "question": {            
          "properties": {
+             "_id": {
+                  "type": "long",
+                  "index": "not_analyzed"
+               },  
              "title": {
                "type": "string",
                "index_analyzer": "index_ansj",
@@ -257,7 +332,7 @@ PUT /questions/
                 "index": "not_analyzed"
             },
             "tags": {
-                "type": "string",
+                "type": "long",
                 "index": "not_analyzed"
             },
             "description": {
@@ -265,17 +340,95 @@ PUT /questions/
             },
             "asktime": {
                "type": "date",
-               "format": "yyyy-MM-ddTHH:mm:ss"
+               "format": "date_time_no_millis"
             },
             "location": {
                "type": "geo_point"
             },
-            "sport": {
-               "type": "string"
+            "voteup":{
+                "type": "long",
+                "index": "not_analyzed"
+            },
+            "votedown":{
+                "type": "long",
+                "index": "not_analyzed"
+            },
+            "answers": {
+                "properties":{
+                    "answerid":{
+                         "type": "long",
+                        "index": "not_analyzed"
+                    },
+                    "anstime": {
+                       "type": "date",
+                       "format": "date_time_no_millis"
+                    },
+                    "answer":{
+                        "type": "string",
+                        "index_analyzer": "index_ansj",
+                        "search_analyzer": "query_ansj"
+                    },
+                    "isacceped": {
+                        "type": "boolean",
+                        "index": "not_analyzed"
+                    } ,
+                    "voteup":{
+                      "type": "long",
+                      "index": "not_analyzed"
+                     },
+                     "votedown":{
+                         "type": "long",
+                         "index": "not_analyzed"
+                     }                 
+                }
             }
          }
       }
    }
+}
+
+
+
+POST /questions/_bulk
+{"index":{"_index":"questions","_type":"question","_id":"1"}}
+{"_id":1, "title":"开发手机客户端需要什么语言", "asker":1, "tags":[1,3], "description": "比如开发一个网站的客户端需要什么语言？\r\n可以安装在andorid,ios设备上,分别用什么语言开发请指点", "asktime":"2014-02-18T10:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T14:16:58Z", "answer":"跨平台可以考虑HTML5", "isacceped":false, "voteup":2, "votedown":2}, {"answerid":2,"anstime":"2014-02-18T14:17:58Z", "answer":"Objective-C、Java、C", "isacceped":true, "voteup":2, "votedown":2}]}
+{"index":{"_index":"questions","_type":"question","_id":"2"}}
+{"_id":2, "title":"youku怎么知道客户的广告不能正常播放了？", "asker":2, "tags":[2,3], "description": "怎么查探出来可以安装在andorid,ios设备上,分别用什么语言开发\r\n请指点" , "asktime":"2014-02-18T12:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T14:16:58Z", "answer": "发现广告视频的HTTP请求出现失败（阻断、限权、0长度等）就可以了","isacceped":false, "voteup":2, "votedown":2},{"answerid":2,"anstime":"2014-02-18T16:16:58Z", "answer":"除了主动判断之外，还可以守株待兔比如广告后面放一层就是提示广告不见鸟的图片，如果广告不见则见图片……\r\n就像 如果外衣不见则见内衣", "isacceped":true, "voteup":2, "votedown":2}]}
+{"index":{"_index":"questions","_type":"question","_id":"3"}}
+{"_id":3, "title":"关于Python里面lambda用法的一个疑惑","asker":3, "tags":[1,2], "description": "标题描述可能不是很准确，因为我不知道问题的原因在哪里可以安装在andorid,ios设备上,分别用什么语言开发请指点", "asktime":"2014-02-18T16:16:58Z", "location":"46.22,-68.45", "voteup": 5, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T15:16:58Z", "answer":"首先更正你的一个概念：\r\n为什么需要先把x赋值给func() 正确的说法是 把func()的返回值赋值给x。然后再来看看这段代码的实际含义：\r\ndef func(): #\n定义函数 func() \n  x = 4 # 函数内部变量 x \n action = (lambda n: x ** n) # \n 定义匿名函数 action(n) \n return action # 返回函数 action 函数对象本身，而不是它的值 \r\n x = func() # func()的返回值赋值给 x，此时的 x 是一个函数对象print x(2) # 调用 action(2)\n其实还可以等价写成下面这个样子：\ndef outer_func(): \n x = 4 \n def inner_func(n): \n return x ** n \n   return inner_func \n x = outer_func() \n print x(2) 如有疑问.", "isacceped":false, "voteup":2, "votedown":2}, {"answerid":1,"anstime":"2014-02-19T14:16:58Z", "answer":"不赋值也行啊，func()(2)，action就是一个接受一个参数的匿名函数对象嘛。既然是一个函数对象，那就要用()才能调用它，然后这个函数对象接受一个参数，那就给个参数它咯:)。", "isacceped":true, "voteup":2, "votedown":2}]}
+
+
+POST /questions/question/_search
+{
+    "size": 200, 
+   "query": {
+      "match_all": {}
+   },
+   "sort": [
+      {
+         "asktime": {
+            "order": "asc"
+         }
+      }
+   ]
+}
+
+//////////////////////////////business logic
+// newest top 15/30/50 questions
+
+POST /questions/question/_search
+{
+    "size": 15, 
+   "query": {
+      "match_all": {}
+   },
+   "sort": [
+      {
+         "asktime": {
+            "order": "desc"
+         }
+      }
+   ]
 }
 
 
