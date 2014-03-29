@@ -5,6 +5,7 @@ var express =       require('express')
     , path =        require('path')
     , User =        require('./server/models/User.js');
 var socketioservice = require('./server/routes/socketio.js');
+var restapi = require('./server/restapi/restapi.js');
 
 
 
@@ -60,18 +61,18 @@ require('./server/udpserver.js')(io);
 ///////////////////////////////Elasticsearch search api
 
 
-var elasticsearch = require('elasticsearch');
+
+
+var questionTopFun = function(httpres,  jsondata){
+    // 主页 topest 100 question 
+          //按提问时间排序最近提问的100个问题
+          var elasticsearch = require('elasticsearch');
           
           var client = new elasticsearch.Client({
             host: 'localhost:9200',
             log: 'trace'
           });    
 
-
-var questionTopFun = function(httpres,  jsondata){
-    // 主页 topest 100 question 
-          //按提问时间排序最近提问的100个问题
-          
           var userQuery = {};
 
           client.search({
@@ -131,4 +132,17 @@ app.post('/top-questions', function(req, res, next) {
     questionTopFun(res, data);
 
     
+});
+
+//rest api call from http post to 3 thrd 
+app.post('/askquestion', function(req, res) {
+    restapi.askQuestion(req, res);   
+});
+
+app.post('/home-top-questions', function(req, res) {
+    restapi.tabTopQuestions(req, res);   
+});
+
+app.post('/most-answers-questions', function(req, res) {
+    restapi.answersQuestions(req, res);   
 });

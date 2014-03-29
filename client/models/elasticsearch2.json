@@ -43,31 +43,31 @@ POST /badges/_bulk
 {"index":{"_index":"badges","_type":"badge","_id":"3"}}
 {"_id":3, "name":"投资者", "description":"第一次对别人的问题出价荣誉奖金", "imgurl":"", "cat":"question", "rating": "bronze"}
 {"index":{"_index":"badges","_type":"badge","_id":"4"}}
-{"_id":4, "name":"好问题", "description":"获得10次以上赞的问题，将获得该徽章.", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"_id":4, "name":"好问题", "description":"获得10次以上赞的问题，将获得该徽章.", "imgurl":"/img/badges/b-19.png", "cat":"question", "rating": "bronze"}
 {"index":{"_index":"badges","_type":"badge","_id":"5"}}
-{"_id":5, "name":"热门问题", "description":"被看过1000次以上的问题，将获得该徽章。", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"_id":5, "name":"热门问题", "description":"被看过1000次以上的问题，将获得该徽章。", "imgurl":"/img/badges/b-3.png", "cat":"question", "rating": "bronze"}
 {"index":{"_index":"badges","_type":"badge","_id":"6"}}
 {"_id":6, "name":"推销者", "description":"第一次对自己的问题出价荣誉奖金。", "imgurl":"", "cat":"question", "rating": "bronze"}
 {"index":{"_index":"badges","_type":"badge","_id":"7"}}
 {"_id":7, "name":"学生", "description":"当提问第一次得到他人的点赞，获得1个以上荣誉奖金，将获得该徽章。", "imgurl":"", "cat":"question", "rating": "bronze"}
 {"index":{"_index":"badges","_type":"badge","_id":"8"}}
-{"_id":8, "name":"学者", "description":"当第一次采纳他人的答案后，你将获得此徽章。问题解决后采纳最佳答案是一个良好的习惯，这不仅是对回答者的一种鼓励，也可以帮助后来者更快解决问题", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"_id":8, "name":"学者", "description":"当第一次采纳他人的答案后，你将获得此徽章。问题解决后采纳最佳答案是一个良好的习惯，这不仅是对回答者的一种鼓励，也可以帮助后来者更快解决问题", "imgurl":"/img/badges/b-6.png", "cat":"question", "rating": "bronze"}
 {"index":{"_index":"badges","_type":"badge","_id":"9"}}
-{"_id":9, "name":"小人物", "description":"提出的问题，一周内没有投票、没有回答、没有评论，也没有几个人看……小人物", "imgurl":"", "cat":"question", "rating": "bronze"}
+{"_id":9, "name":"小人物", "description":"提出的问题，一周内没有投票、没有回答、没有评论，也没有几个人看……小人物", "imgurl":"/img/badges/b-12.png", "cat":"question", "rating": "bronze"}
 {"index":{"_index":"badges","_type":"badge","_id":"10"}}
 {"_id":10, "name":"受欢迎问题", "description":"被25个以上用户收藏过的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
 {"index":{"_index":"badges","_type":"badge","_id":"11"}}
-{"_id":11, "name":"优秀问题", "description":"获得25次以上赞的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
+{"_id":11, "name":"优秀问题", "description":"获得25次以上赞的问题，将获得该银质徽章", "imgurl":"/img/badges/b-23.png", "cat":"question", "rating": "silver"}
 {"index":{"_index":"badges","_type":"badge","_id":"12"}}
-{"_id":12, "name":"火爆问题", "description":"被看过2500次以上的问题，将获得该银质徽章", "imgurl":"", "cat":"question", "rating": "silver"}
+{"_id":12, "name":"火爆问题", "description":"被看过2500次以上的问题，将获得该银质徽章", "imgurl":"/img/badges/b-8.png", "cat":"question", "rating": "silver"}
 {"index":{"_index":"badges","_type":"badge","_id":"13"}}
 {"_id":13, "name":"五星级问题", "description":"被100个用户收藏过的问题, 将获得该金质徽章.", "imgurl":"", "cat":"question", "rating": "gold"}
 {"index":{"_index":"badges","_type":"badge","_id":"14"}}
-{"_id":14, "name":"伟大问题", "description":"获得100次以上赞的问题， 将获得金质徽章!", "imgurl":"", "cat":"question", "rating": "gold"}
+{"_id":14, "name":"伟大问题", "description":"获得100次以上赞的问题， 将获得金质徽章!", "imgurl":"/img/badges/b-25.png", "cat":"question", "rating": "gold"}
 {"index":{"_index":"badges","_type":"badge","_id":"15"}}
-{"_id":15, "name":"超火爆问题", "description":"被看过10000次以上的问题，将获得金质徽章!", "imgurl":"", "cat":"question", "rating": "gold"}
+{"_id":15, "name":"超火爆问题", "description":"被看过10000次以上的问题，将获得金质徽章!", "imgurl":"/img/badges/b-17.png", "cat":"question", "rating": "gold"}
 {"index":{"_index":"badges","_type":"badge","_id":"16"}}
-{"_id":16, "name":"好答案", "description":"答案获得10次以上的赞同，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "bronze"}
+{"_id":16, "name":"好答案", "description":"答案获得10次以上的赞同，将获得该徽章", "imgurl":"/img/badges/b-15.png", "cat":"answer", "rating": "bronze"}
 {"index":{"_index":"badges","_type":"badge","_id":"17"}}
 {"_id":17, "name":"复活答案", "description":"回答30多天后，第一次获得2个荣誉奖金，点赞的答案。", "imgurl":"", "cat":"answer", "rating": "bronze"}
 {"index":{"_index":"badges","_type":"badge","_id":"18"}}
@@ -79,13 +79,13 @@ POST /badges/_bulk
 {"index":{"_index":"badges","_type":"badge","_id":"21"}}
 {"_id":21, "name":"高手", "description":"被认可答案超过40赞以上的，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
 {"index":{"_index":"badges","_type":"badge","_id":"22"}}
-{"_id":22, "name":"优秀答案", "description":"答案获得25次以上的赞同，将获得该徽章", "imgurl":"", "cat":"answer", "rating": "silver"}
+{"_id":22, "name":"优秀答案", "description":"答案获得25次以上的赞同，将获得该徽章", "imgurl":"/img/badges/b-21.png", "cat":"answer", "rating": "silver"}
 {"index":{"_index":"badges","_type":"badge","_id":"23"}}
 {"_id":23, "name":"巫师", "description":"回答问题超过60天以上，并获得5个赞，将获得该徽章.", "imgurl":"", "cat":"answer", "rating": "silver"}
 {"index":{"_index":"badges","_type":"badge","_id":"24"}}
 {"_id":24, "name":"顽强答案", "description":"5%-20% 接受的答案都是0个赞，真够顽强的！.", "imgurl":"", "cat":"questions", "rating": "silver"}
 {"index":{"_index":"badges","_type":"badge","_id":"25"}}
-{"_id":25, "name":"伟大答案", "description":"答案获得100次以上的赞同，将获得该徽章.", "imgurl":"", "cat":"questions", "rating": "gold"}
+{"_id":25, "name":"伟大答案", "description":"答案获得100次以上的赞同，将获得该徽章.", "imgurl":"/img/badges/b-24.png", "cat":"questions", "rating": "gold"}
 {"index":{"_index":"badges","_type":"badge","_id":"26"}}
 {"_id":26, "name":"逆转者", "description":"提供答案获得20个赞道-5个赞.", "imgurl":"", "cat":"questions", "rating": "gold"}
 {"index":{"_index":"badges","_type":"badge","_id":"27"}}
@@ -135,7 +135,7 @@ POST /badges/_bulk
 
 POST /badges/badge/_search
 {
-    "size": 200, 
+    "size": 1000, 
    "query": {
       "match_all": {}
    },
@@ -310,90 +310,11 @@ POST /users/user/_search
    ]
 }
 
-
-DELETE /questions/ 
-
-PUT /questions/
-{
-   "mappings": {        
-        "question": {            
-         "properties": {
-             "_id": {
-                  "type": "long",
-                  "index": "not_analyzed"
-               },  
-             "title": {
-               "type": "string",
-               "index_analyzer": "index_ansj",
-               "search_analyzer": "query_ansj"
-            },
-            "asker": {
-                "type": "long",
-                "index": "not_analyzed"
-            },
-            "tags": {
-                "type": "long",
-                "index": "not_analyzed"
-            },
-            "description": {
-                "type": "string"
-            },
-            "asktime": {
-               "type": "date",
-               "format": "date_time_no_millis"
-            },
-            "location": {
-               "type": "geo_point"
-            },
-            "voteup":{
-                "type": "long",
-                "index": "not_analyzed"
-            },
-            "votedown":{
-                "type": "long",
-                "index": "not_analyzed"
-            },
-            "answers": {
-                "properties":{
-                    "answerid":{
-                         "type": "long",
-                        "index": "not_analyzed"
-                    },
-                    "anstime": {
-                       "type": "date",
-                       "format": "date_time_no_millis"
-                    },
-                    "answer":{
-                        "type": "string",
-                        "index_analyzer": "index_ansj",
-                        "search_analyzer": "query_ansj"
-                    },
-                    "isacceped": {
-                        "type": "boolean",
-                        "index": "not_analyzed"
-                    } ,
-                    "voteup":{
-                      "type": "long",
-                      "index": "not_analyzed"
-                     },
-                     "votedown":{
-                         "type": "long",
-                         "index": "not_analyzed"
-                     }                 
-                }
-            }
-         }
-      }
-   }
-}
-
-
-
 POST /questions/_bulk
 {"index":{"_index":"questions","_type":"question","_id":"1"}}
-{"_id":1, "title":"开发手机客户端需要什么语言", "asker":1, "tags":[1,3], "description": "比如开发一个网站的客户端需要什么语言？\r\n可以安装在andorid,ios设备上,分别用什么语言开发请指点", "asktime":"2014-02-18T10:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T14:16:58Z", "answer":"跨平台可以考虑HTML5", "isacceped":false, "voteup":2, "votedown":2}, {"answerid":2,"anstime":"2014-02-18T14:17:58Z", "answer":"Objective-C、Java、C", "isacceped":true, "voteup":2, "votedown":2}]}
+{"_id":1, "title":"开发手机客户端需要什么语言", "asker":1, "tags":[1,3], "description": "比如开发一个网站的客户端需要什么语言？\r\n可以安装在andorid,ios设备上,分别用什么语言开发请指点", "asktime":"2014-02-18T10:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T14:16:58Z", "answer":"跨平台可以考虑HTML5", "isacceped":false, "voteup":2, "votedown":2}, {"answerid":2,"anstime":"2014-02-18T14:17:58Z", "answer":"Objective-C、Java、C", "isacceped":true, "voteup":2, "votedown":2},{"answerid":3,"anstime":"2014-02-19T14:17:58Z", "answer":"可以用java", "isacceped":false, "votes":2 }]}
 {"index":{"_index":"questions","_type":"question","_id":"2"}}
-{"_id":2, "title":"youku怎么知道客户的广告不能正常播放了？", "asker":2, "tags":[2,3], "description": "怎么查探出来可以安装在andorid,ios设备上,分别用什么语言开发\r\n请指点" , "asktime":"2014-02-18T12:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T14:16:58Z", "answer": "发现广告视频的HTTP请求出现失败（阻断、限权、0长度等）就可以了","isacceped":false, "voteup":2, "votedown":2},{"answerid":2,"anstime":"2014-02-18T16:16:58Z", "answer":"除了主动判断之外，还可以守株待兔比如广告后面放一层就是提示广告不见鸟的图片，如果广告不见则见图片……\r\n就像 如果外衣不见则见内衣", "isacceped":true, "voteup":2, "votedown":2}]}
+{"_id":2, "title":"youku怎么知道客户的广告不能正常播放了？", "asker":2, "tags":[2,3], "description": "怎么查探出来可以安装在andorid,ios设备上,分别用什么语言开发\r\n请指点" , "asktime":"2014-02-18T12:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T14:16:58Z", "answer": "发现广告视频的HTTP请求出现失败（阻断、限权、0长度等）就可以了","isacceped":false, "voteup":2, "votedown":2},{"answerid":2,"anstime":"2014-02-18T16:16:58Z", "answer":"除了主动判断之外，还可以守株待兔比如广告后面放一层就是提示广告不见鸟的图片，如果广告不见则见图片……\r\n就像 如果外衣不见则见内衣", "isacceped":true, "voteup":2, "votedown":2},{"answerid":3,"anstime":"2014-02-19T16:16:58Z", "answer":"用新的方法", "isacceped":false, "voteup":5, "votedown":6},{"answerid":4,"anstime":"2014-02-20T16:16:58Z", "answer":"第四个答案", "isacceped":false, "voteup":3, "votedown":1}]}
 {"index":{"_index":"questions","_type":"question","_id":"3"}}
 {"_id":3, "title":"关于Python里面lambda用法的一个疑惑","asker":3, "tags":[1,2], "description": "标题描述可能不是很准确，因为我不知道问题的原因在哪里可以安装在andorid,ios设备上,分别用什么语言开发请指点", "asktime":"2014-02-18T16:16:58Z", "location":"46.22,-68.45", "voteup": 5, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T15:16:58Z", "answer":"首先更正你的一个概念：\r\n为什么需要先把x赋值给func() 正确的说法是 把func()的返回值赋值给x。然后再来看看这段代码的实际含义：\r\ndef func(): #\n定义函数 func() \n  x = 4 # 函数内部变量 x \n action = (lambda n: x ** n) # \n 定义匿名函数 action(n) \n return action # 返回函数 action 函数对象本身，而不是它的值 \r\n x = func() # func()的返回值赋值给 x，此时的 x 是一个函数对象print x(2) # 调用 action(2)\n其实还可以等价写成下面这个样子：\ndef outer_func(): \n x = 4 \n def inner_func(n): \n return x ** n \n   return inner_func \n x = outer_func() \n print x(2) 如有疑问.", "isacceped":false, "voteup":2, "votedown":2}, {"answerid":1,"anstime":"2014-02-19T14:16:58Z", "answer":"不赋值也行啊，func()(2)，action就是一个接受一个参数的匿名函数对象嘛。既然是一个函数对象，那就要用()才能调用它，然后这个函数对象接受一个参数，那就给个参数它咯:)。", "isacceped":true, "voteup":2, "votedown":2}]}
 
@@ -413,8 +334,9 @@ POST /questions/question/_search
    ]
 }
 
+
 //////////////////////////////business logic
-// newest top 15/30/50 questions
+// newest top 15/30/50 questions by anonys
 
 POST /questions/question/_search
 {
@@ -431,6 +353,125 @@ POST /questions/question/_search
    ]
 }
 
+
+//most answers question
+curl -XGET 'http://127.0.0.1:9200/my_index/author/_search?pretty=1'  -d '
+{
+   "query" : {
+      "custom_score_query" : {
+         "script" : {
+            "script" : "_score * _score / doc[\u0027total_books\u0027]"
+         },
+         "query" : {
+            "has_child" : {
+               "query" : {
+                  "constant_score" : {
+                     "query" : {
+                        "match" : {
+                           "book_title" : "the wind in the willows"
+                        }
+                     }
+                  }
+               },
+               "score_mode" : "sum",
+               "type" : "book"
+            }
+         }
+      }
+   }
+}
+'
+
+http://127.0.0.1:9200/my_index/author/_search
+{ 
+    "query": { 
+        "top_children": { 
+            "type": "book", 
+            "factor": 10000, 
+            "score": "max", 
+            "query":{ 
+                "custom_filters_score": { 
+                    "query" : {"match_all" : {}}, 
+                    "filters" : [{ 
+                        "filter" : {"term": {"book_title": "Hello world"}}, 
+                        "script": " 
+                            aid = doc['authorId'].value; 
+                            cnt = doc['booksCount'].value; 
+                            if(found[aid] == null) 
+                                found.put(aid, 0); 
+                            found[aid] = found[aid] + 1; 
+                            found[aid]*found[aid] / cnt 
+                         " 
+                    }], 
+                    "params":{"found": {}, "aid": 0, "cnt" : 0} 
+                } 
+            } 
+        } 
+    } 
+} 
+
+
+
+////////////////////////parent child start
+DELETE /authors/
+PUT /authors/bare_author/1
+{
+    "name": "Multi G. Enre"
+}
+
+PUT /authors/bare_author/2
+{
+    "name": "Alastair Reynolds"
+}
+
+POST /authors/book/_mapping
+{
+   "book":{
+      "_parent": {"type": "bare_author"}
+   }
+}
+
+POST /authors/book/1?parent=2
+{
+   "name": "Revelation Space",
+   "genre": "scifi",
+   "publisher": "penguin"
+}
+
+POST /authors/book/2?parent=1
+{
+    "name": "Guns and lasers",
+    "genre": "scifi",
+    "publisher": "orbit"
+}
+
+POST /authors/book/3?parent=1
+{
+   "name": "Dead in the night",
+   "genre": "thriller",
+   "publisher": "penguin"
+}
+
+POST /authors/bare_author/_search
+{
+    "query": {
+    "has_child": {
+      "type": "book",
+      "query" : {
+        "filtered": {
+          "query": { "match_all": {}},
+          "filter" : {
+            "and": [
+              {"term": {"publisher": "penguin"}},
+              {"term": {"genre": "scifi"}}
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+////////////////////////parent child end
 
 POST /sports/_bulk
 {"index":{"_index":"sports","_type":"athlete"}}
@@ -631,4 +672,194 @@ POST /sports/athlete/_search
          }
       }
    }
+}
+
+/////////////////////////////////////////////////
+DELETE /posts/
+
+POST /posts/
+
+POST /posts/rating/_mapping 
+{
+  "rating":{
+    "_parent": {"type": "post"}
+  }
+}
+
+POST /posts/post/1 
+{ "title": "bolivia rated 4" }
+POST /posts/post/2 
+{ "title": "bolivia rated 2" }
+POST /posts/post/3 
+{ "title": "another country rated 4" }
+POST /posts/rating/1?parent=1  
+{ "user_id": 1234, "rating": 4}
+POST /posts/rating/2?parent=2  
+{ "user_id": 1234, "rating": 2}
+POST /posts/rating/3?parent=2  
+{ "user_id": 4234, "rating": 5}
+POST /posts/rating/4?parent=3  
+{ "user_id": 1234, "rating": 5}
+
+POST /posts/rating/_search?pretty=true 
+{
+  "query": {
+    "filtered": {
+      "query": {"match_all": {}},
+      "filter": {
+        "and": [
+          {"term": {"user_id": 1234}},
+          {
+            "has_parent": {
+              "type": "post",
+              "query": {
+                "term": {"title": "bolivia"}
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "sort": [
+    { "rating" : {"order" : "desc"} }
+  ]
+}
+
+
+POST /posts/_search 
+{
+  "query": {
+    "top_children":{
+      "type": "rating",
+      "query": {
+        "custom_score": {
+          "script": "doc['rating'].value", 
+          "query": {
+            "filtered": {
+              "query": {"match_all": {}},
+              "filter": {"term": {"user_id": 1234}}
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+POST /sports/athlete/_search
+{
+   "query" : {
+      "custom_score_query" : {
+         "script" : {
+            "script" : "_score * _score / doc[\u0027total_books\u0027]"
+         },
+         "query" : {
+            "has_child" : {
+               "query" : {
+                  "constant_score" : {
+                     "query" : {
+                        "match" : {
+                           "book_title" : "the wind in the willows"
+                        }
+                     }
+                  }
+               },
+               "score_mode" : "sum",
+               "type" : "book"
+            }
+         }
+      }
+   }
+}
+
+
+POST /authors/bare_author/_search
+{ 
+    "query": { 
+        "top_children": { 
+            "type": "book", 
+            "factor": 10000, 
+            "score": "max", 
+            "query":{ 
+                "custom_filters_score": { 
+                    "query" : {"match_all" : {}}, 
+                    "filters" : [{ 
+                        "filter" : {"term": {"authorid": 1}}, 
+                        "script": " 
+                            aid = doc['authorId'].value; 
+                            cnt = doc['booksCount'].value; 
+                            if(found[aid] == null) 
+                                found.put(aid, 0); 
+                            found[aid] = found[aid] + 1; 
+                            found[aid]*found[aid] / cnt 
+                         " 
+                    }], 
+                    "params":{"found": {}, "aid": 0, "cnt" : 0} 
+                } 
+            } 
+        } 
+    } 
+} 
+
+/////////////////////////////////////questions test
+
+DELETE /questions/
+PUT /questions/question/1
+{
+    "name": "Multi G. Enre"
+}
+
+PUT /questions/question/2
+{
+    "name": "Alastair Reynolds"
+}
+
+POST /questions/answer/_mapping
+{
+   "answer":{
+      "_parent": {"type": "question"}
+   }
+}
+
+POST /questions/answer/1?parent=2
+{
+   "name": "Revelation Space",
+   "genre": "scifi",
+   "publisher": "penguin"
+}
+
+POST /questions/answer/2?parent=1
+{
+    "name": "Guns and lasers",
+    "genre": "scifi",
+    "publisher": "orbit"
+}
+
+POST /questions/answer/3?parent=1
+{
+   "name": "Dead in the night",
+   "genre": "thriller",
+   "publisher": "penguin"
+}
+
+POST /questions/bare_author/_search
+{
+    "query": {
+    "has_child": {
+      "type": "answer",
+      "query" : {
+        "filtered": {
+          "query": { "match_all": {}},
+          "filter" : {
+            "and": [
+              {"term": {"publisher": "penguin"}},
+              {"term": {"genre": "scifi"}}
+            ]
+          }
+        }
+      }
+    }
+  }
 }
