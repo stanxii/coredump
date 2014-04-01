@@ -98,8 +98,8 @@ angular.module('nggl')
 
 angular.module('nggl')
 .controller('QuestionsAskCtrl',
-[   '$rootScope', '$scope', '$location', 'socket', 'Auth',
-function($rootScope, $scope, $location, socket, Auth) {
+[   '$rootScope', '$scope', '$location', 'Auth',
+function($rootScope, $scope, $location,  Auth) {
 
 
     $scope.question = {               
@@ -112,29 +112,43 @@ function($rootScope, $scope, $location, socket, Auth) {
 
     $scope.askQuestion = function() {
 		$scope.question.urlimg = Auth.user.urlimg;
-        var jsondata = $scope.question ;
-        socket.emit('send:questions.ask' , jsondata);
+        var jsondata = $scope.question ;        
+
+        ///////////////////
+        var url = '/askquestion';
+        var postCfg = {
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                   /* transformRequest: transFn*/
+                };
+        
+
+        //$http.post(url, jsondata, postCfg)
+        $http.post(url, jsondata)
+            .success(function(data, status){
+                if(data.result === "ok"){
+                    $scope.questions = data.questions;
+                    console.log("ok questions =" + $scope.qid);
+                    console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
+                    $location.path('/questions/' + data.id);
+                }
+                else
+                    return;
+            })
+            .error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+            });
+        //////////////////
     }
 
-    socket.on('send:questions.ask.res', function (data) {
-        console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
-
-        if(data.result == "ok")
-            $location.path('/questions/' + data.id);
-        else
-            return;
-    });
-
-}
-
-]);
+}]);
 
 
 
 angular.module('nggl')
 .controller('QuestionsDetailCtrl',
-[   '$rootScope', '$scope', '$routeParams', '$location', 'socket', 'Auth',
-function($rootScope, $scope, $routeParams, $location, socket, Auth) {
+[   '$rootScope', '$scope', '$routeParams', '$location', 'Auth',
+function($rootScope, $scope, $routeParams, $location, Auth) {
 
     // $routeParams.qid
 
@@ -142,7 +156,7 @@ function($rootScope, $scope, $routeParams, $location, socket, Auth) {
     var jsondata = {
             qid : $routeParams.qid
         }
-    socket.emit('send:questions.question' , jsondata);
+    //socket.emit('send:questions.question' , jsondata);
     
     $scope.newanswer = {               
         askerid: "",
@@ -155,27 +169,27 @@ function($rootScope, $scope, $routeParams, $location, socket, Auth) {
 	$scope.submitAnswer = function() {			
         var jsondata = $scope.newanswer ;		
         //保存到数据库
-        socket.emit('send:questions.question.answer' , jsondata);
+        //socket.emit('send:questions.question.answer' , jsondata);
     }
 
-    socket.on('send:questions.question.res', function (data) {
-        console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
+  //   socket.on('send:questions.question.res', function (data) {
+  //       console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
          
-        if(data.result === "ok"){
-            $scope.question = data.question;			
-        }else if(data.result === "reload"){
-			location.reload();
-		}else
-            return;
+  //       if(data.result === "ok"){
+  //           $scope.question = data.question;			
+  //       }else if(data.result === "reload"){
+		// 	location.reload();
+		// }else
+  //           return;
 
-    });
+  //   });
     
 }]);
 
 angular.module('nggl')
 .controller('QuestionsTopCtrl',
-[   '$rootScope', '$scope', '$http', '$location', 'socket', 
-function($rootScope, $scope, $http, $location, socket) {
+[   '$rootScope', '$scope', '$http', '$location',  
+function($rootScope, $scope, $http, $location) {
 
     // $routeParams.qid
 
@@ -190,7 +204,7 @@ function($rootScope, $scope, $http, $location, socket) {
         return question._id;
     }
 
-    var url = '/top-questions';
+    var url = '/home-top-questions';
     var postCfg = {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                /* transformRequest: transFn*/
@@ -216,8 +230,8 @@ function($rootScope, $scope, $http, $location, socket) {
 
 angular.module('nggl')
 .controller('QuestionsUserCtrl',
-[   '$rootScope', '$scope', '$http', '$location', 'socket', 'Auth',
-function($rootScope, $scope, $http, $location, socket, Auth) {
+[   '$rootScope', '$scope', '$http', '$location', 'Auth',
+function($rootScope, $scope, $http, $location, Auth) {
 	$scope.user = Auth.user;
     
 }]);

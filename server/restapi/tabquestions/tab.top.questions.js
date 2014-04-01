@@ -1,8 +1,7 @@
-var _ =           require('underscore')
-    , User =      require('../models/User.js');
+
 
 module.exports = {    
-    tabTopQuestions: function(client, req, res) {
+    tabTopQuestions: function(esclient, redis, req, res) {
         var topquestions = {};
 
 	    console.log(req.body);//请求中还有参数data,data的值为一个json字符串
@@ -15,7 +14,7 @@ module.exports = {
 
 	    var userQuery = {};
 
-        client.search({
+        esclient.search({
           index: 'questions',
           type: 'question',                            
           body: {                
@@ -28,24 +27,22 @@ module.exports = {
         }, function (error, response) {
             var result = {
                 status:"ok",
-                questions: ""
+                questions: []
               }
-
-            var questions = [];
               
             if (error) {
               // handle error
-              result.questions = "failed";                
+              result.status = "failed";                
             }else{
-            	result.questions = "ok"; 
+            	result.status = "ok"; 
             	for(var i= 0; i< response.hits.hits.length; i++ ){
-                  questions.push(response.hits.hits[i]._source);
+                  result.questions.push(response.hits.hits[i]._source);
               }
-              result.questions = questions;
+              
             }
             //console.log("now search result = " + JSON.stringify(response));
           
-            console.log("result ES ==" + JSON.stringify(res));
+            console.log("result ES ==" + JSON.stringify(response));
   			    res.send(result);//给客户端返回一个json格式的数据
              //res.json(topquestions);
   			    res.end();

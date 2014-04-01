@@ -1,11 +1,3 @@
-var elasticsearch = require('elasticsearch');
-      
-var client = new elasticsearch.Client({
-host: 'localhost:9200',
-log: 'trace'
-});    
-
-
 var Askquestion = require('../restapi/questions/ask.question.js');
 var TabTopQ = require('../restapi/tabquestions/tab.top.questions.js');
 var TabInterestQ = require('../restapi/tabquestions/tab.interesting.questions.js');
@@ -25,56 +17,56 @@ var AnswersQuestions = require('../restapi/questions/answers.questions.js');
 var UnanswersQuestions = require('../restapi/questions/unanswers.questions.js'); 
 
 module.exports = {
-    askQuestion: function(client, req, res) {
-        Askquestion.askQuestion(client, req, res);        
+    askQuestion: function(esclient, redis, req, res) {
+        Askquestion.askQuestion(esclient, redis, req, res);        
     },
     //questions tab== list get frome redis sorted set quene very fast.
-    tabTopQuestions: function(client, req, res) {
-        TabTopQ.tabTopQuestions(client, req, res);        
+    tabTopQuestions: function(esclient, redis, req, res) {
+        TabTopQ.tabTopQuestions(esclient, redis, req, res);        
     },
-    tabInterestingQuestions: function(client, req, res) {
-        TabInterestQ.tabInterestingQuestions(client, req, res);        
+    tabInterestingQuestions: function(esclient, redis, req, res) {
+        TabInterestQ.tabInterestingQuestions(esclient, redis, req, res);        
     },
-    tabFeaturedQ: function(client, req, res) {
-        TabFeaturedQ.tabFeaturedQuestions(client, req, res);        
+    tabFeaturedQ: function(esclient, redis, req, res) {
+        TabFeaturedQ.tabFeaturedQuestions(esclient, redis, req, res);        
     },
-    tabHotQuestion: function(client, req, res) {
-        TabHotQ.tabHotQuestion(client, req, res);        
+    tabHotQuestion: function(esclient, redis, req, res) {
+        TabHotQ.tabHotQuestion(esclient, redis, req, res);        
     },
-    tabWeekQuestions: function(client, req, res) {
-        TabWeekQ.tabWeekQuestions(client, req, res);        
+    tabWeekQuestions: function(esclient, redis, req, res) {
+        TabWeekQ.tabWeekQuestions(esclient, redis, req, res);        
     },
-    tabMonthQuestion: function(client, req, res) {
-        TabMonthQ.tabMonthQuestion(client, req, res);        
+    tabMonthQuestion: function(esclient, redis, req, res) {
+        TabMonthQ.tabMonthQuestion(esclient, redis, req, res);        
     },
 
     //Questions from ES index sorted by ... list
-    allQuestions: function(client, req, res) {
-    	AllQuestions.allQuestions(client, req, res);
+    allQuestions: function(esclient, redis, req, res) {
+    	AllQuestions.allQuestions(esclient, redis, req, res);
     },
-    newestQuestions: function(client, req, res) {
-    	NewestQuestions.newestQuestions(client, req, res);
+    newestQuestions: function(esclient, redis, req, res) {
+    	NewestQuestions.newestQuestions(esclient, redis, req, res);
     },
-    featuredQuestions: function(client, req, res) {
-    	FeaturedQuestions.featuredQuestions(client, req, res);
+    featuredQuestions: function(esclient, redis, req, res) {
+    	FeaturedQuestions.featuredQuestions(esclient, redis, req, res);
     },
-    frequentQuestions: function(client, req, res) {
-    	FrequentQuestions.frequentQuestions(client, req, res);
+    frequentQuestions: function(esclient, redis, req, res) {
+    	FrequentQuestions.frequentQuestions(esclient, redis, req, res);
     },
-    activeQuestions: function(client, req, res) {
-    	ActiveQuestions.activeQuestions(client, req, res);
+    activeQuestions: function(esclient, redis, req, res) {
+    	ActiveQuestions.activeQuestions(esclient, redis, req, res);
     },
-    votesQuestions: function(client, req, res) {
-    	VotesQuestions.votesQuestions.(client, req, res);
+    votesQuestions: function(esclient, redis, req, res) {
+        VotesQuestions.votesQuestions(esclient, redis, req, res);
     },
-    viewsQuestions: function(client, req, res) {
-    	ViewsQuestions.viewsQuestions(client, req, res);
+    viewsQuestions: function(esclient, redis, req, res) {
+    	ViewsQuestions.viewsQuestions(esclient, redis, req, res);
     },
-    answersQuestions: function(client, req, res) {
-    	AnswersQuestions.answersQuestions(client, req, res);
+    answersQuestions: function(esclient, redis, req, res) {
+    	AnswersQuestions.answersQuestions(esclient, redis, req, res);
     },
-    unanswersQuestions: function(client, req, res) {
-    	UnanswersQuestions.unanswersQuestions(client, req, res);
+    unanswersQuestions: function(esclient, redis, req, res) {
+    	UnanswersQuestions.unanswersQuestions(esclient, redis, req, res);
     }
     
 };

@@ -1,8 +1,7 @@
-var _ =           require('underscore')
-    , User =      require('../models/User.js');
+
 
 module.exports = {    
-    tabInterestingQuestions: function(client, req, res) {
+    tabInterestingQuestions: function(esclient, redis, req, res) {
         var questions = {};
         res.json(questions);
     }

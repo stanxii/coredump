@@ -3,9 +3,9 @@ var express =       require('express')
     , http =        require('http')
     , passport =    require('passport')
     , path =        require('path')
-    , User =        require('./server/models/User.js');
-var socketioservice = require('./server/routes/socketio.js');
-var restapi = require('./server/restapi/restapi.js');
+    , User =        require('./server/models/User.js')
+    , restapi = require('./server/restapi/restapi.js')
+    , logger = require("morgan")    
 
 
 
@@ -21,7 +21,9 @@ app.set('views', __dirname + '/client/views');
 //app.set('view engine', 'jade');
 //xxx
 
-app.use(express.logger('dev'))
+app.use(logger());
+
+
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -30,6 +32,7 @@ app.use(express.cookieSession(
     {
         secret: process.env.COOKIE_SECRET || "Superdupersecret"
     }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -52,30 +55,28 @@ hserver.listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
 });
 
-var io = require('socket.io').listen(hserver);
 
-io.sockets.on('connection', socketioservice.socketioservice);
 
-require('./server/udpserver.js')(io);
 
 ///////////////////////////////Elasticsearch search api
 
+var redis = require('redis').createClient();
+var elasticsearch = require('elasticsearch');
 
-
+redis.set("global:top:question:n", 50);          
+var esclient = new elasticsearch.Client({
+  host: 'localhost:9200',
+  log: 'trace'
+});  
 
 var questionTopFun = function(httpres,  jsondata){
     // 主页 topest 100 question 
           //按提问时间排序最近提问的100个问题
-          var elasticsearch = require('elasticsearch');
+            
           
-          var client = new elasticsearch.Client({
-            host: 'localhost:9200',
-            log: 'trace'
-          });    
-
           var userQuery = {};
 
-          client.search({
+          esclient.search({
               index: 'questions',
               type: 'question',                            
               body: {                
@@ -136,13 +137,13 @@ app.post('/top-questions', function(req, res, next) {
 
 //rest api call from http post to 3 thrd 
 app.post('/askquestion', function(req, res) {
-    restapi.askQuestion(req, res);   
+    restapi.askQuestion(esclient, req, res, esclient);   
 });
 
 app.post('/home-top-questions', function(req, res) {
-    restapi.tabTopQuestions(req, res);   
+    restapi.tabTopQuestions(esclient, redis, req, res);   
 });
 
 app.post('/most-answers-questions', function(req, res) {
-    restapi.answersQuestions(req, res);   
+    restapi.answersQuestions(esclient, redis, req, res);   
 });
