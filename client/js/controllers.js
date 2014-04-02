@@ -214,7 +214,7 @@ function($rootScope, $scope, $http, $location) {
     //$http.post(url, jsondata, postCfg)
     $http.post(url, jsondata)
             .success(function(data, status){
-                if(data.result === "ok"){
+                if(data.status === "ok"){
                     $scope.questions = data.questions;
                     console.log("questions =" + $scope.questions);
                 }

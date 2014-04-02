@@ -310,13 +310,134 @@ POST /users/user/_search
    ]
 }
 
+
+
+DELETE /questions/question
+
+PUT /questions/question/_mapping
+{
+    "question":  {            
+        "properties": {
+           "_id": {
+              "type": "long",
+              "index": "not_analyzed"
+           },  
+            "title": {
+                "type": "string",
+                "index_analyzer": "index_ansj",
+                "search_analyzer": "query_ansj"
+            },
+            "asker": {
+                "type": "long",
+                "index": "not_analyzed"
+            },
+            "tags": {
+               "type": "long",
+               "index": "not_analyzed"
+            },
+            "description": {
+                "type": "string",                    
+                "index_analyzer": "index_ansj",
+                "search_analyzer": "query_ansj"
+            },
+            "asktime": {
+                "type": "string",
+                "format": "date_time_no_millis"
+            },
+            "location": {
+                "type": "geo_point"
+            },
+            "voteup": {
+                "type": "long",
+                "index": "not_analyzed"       
+            },
+            "votedown": {
+                "type": "long",
+                "index": "not_analyzed"       
+            },
+            "views": {
+                "type": "long",
+                "index": "not_analyzed"       
+            },
+            "answers": {
+                "type": "long",
+                "index": "not_analyzed"       
+            }
+        }
+    }
+}
+
 POST /questions/_bulk
 {"index":{"_index":"questions","_type":"question","_id":"1"}}
-{"_id":1, "title":"开发手机客户端需要什么语言", "asker":1, "tags":[1,3], "description": "比如开发一个网站的客户端需要什么语言？\r\n可以安装在andorid,ios设备上,分别用什么语言开发请指点", "asktime":"2014-02-18T10:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T14:16:58Z", "answer":"跨平台可以考虑HTML5", "isacceped":false, "voteup":2, "votedown":2}, {"answerid":2,"anstime":"2014-02-18T14:17:58Z", "answer":"Objective-C、Java、C", "isacceped":true, "voteup":2, "votedown":2},{"answerid":3,"anstime":"2014-02-19T14:17:58Z", "answer":"可以用java", "isacceped":false, "votes":2 }]}
+{"_id":1, "title":"开发手机客户端需要什么语言", "asker":1, "tags":[1,3], "description": "比如开发一个网站的客户端需要什么语言？\r\n可以安装在andorid,ios设备上,分别用什么语言开发请指点", "asktime":"2014-02-18T10:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "views":22, "answers": 3}
 {"index":{"_index":"questions","_type":"question","_id":"2"}}
-{"_id":2, "title":"youku怎么知道客户的广告不能正常播放了？", "asker":2, "tags":[2,3], "description": "怎么查探出来可以安装在andorid,ios设备上,分别用什么语言开发\r\n请指点" , "asktime":"2014-02-18T12:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T14:16:58Z", "answer": "发现广告视频的HTTP请求出现失败（阻断、限权、0长度等）就可以了","isacceped":false, "voteup":2, "votedown":2},{"answerid":2,"anstime":"2014-02-18T16:16:58Z", "answer":"除了主动判断之外，还可以守株待兔比如广告后面放一层就是提示广告不见鸟的图片，如果广告不见则见图片……\r\n就像 如果外衣不见则见内衣", "isacceped":true, "voteup":2, "votedown":2},{"answerid":3,"anstime":"2014-02-19T16:16:58Z", "answer":"用新的方法", "isacceped":false, "voteup":5, "votedown":6},{"answerid":4,"anstime":"2014-02-20T16:16:58Z", "answer":"第四个答案", "isacceped":false, "voteup":3, "votedown":1}]}
+{"_id":2, "title":"youku怎么知道客户的广告不能正常播放了？", "asker":2, "tags":[2,3], "description": "怎么查探出来可以安装在andorid,ios设备上,分别用什么语言开发\r\n请指点" , "asktime":"2014-02-18T12:16:58Z", "location":"46.22,-68.45", "voteup": 15, "votedown":2, "views":32, "answers": 4}
 {"index":{"_index":"questions","_type":"question","_id":"3"}}
-{"_id":3, "title":"关于Python里面lambda用法的一个疑惑","asker":3, "tags":[1,2], "description": "标题描述可能不是很准确，因为我不知道问题的原因在哪里可以安装在andorid,ios设备上,分别用什么语言开发请指点", "asktime":"2014-02-18T16:16:58Z", "location":"46.22,-68.45", "voteup": 5, "votedown":2, "answers":[{"answerid":2,"anstime":"2014-02-18T15:16:58Z", "answer":"首先更正你的一个概念：\r\n为什么需要先把x赋值给func() 正确的说法是 把func()的返回值赋值给x。然后再来看看这段代码的实际含义：\r\ndef func(): #\n定义函数 func() \n  x = 4 # 函数内部变量 x \n action = (lambda n: x ** n) # \n 定义匿名函数 action(n) \n return action # 返回函数 action 函数对象本身，而不是它的值 \r\n x = func() # func()的返回值赋值给 x，此时的 x 是一个函数对象print x(2) # 调用 action(2)\n其实还可以等价写成下面这个样子：\ndef outer_func(): \n x = 4 \n def inner_func(n): \n return x ** n \n   return inner_func \n x = outer_func() \n print x(2) 如有疑问.", "isacceped":false, "voteup":2, "votedown":2}, {"answerid":1,"anstime":"2014-02-19T14:16:58Z", "answer":"不赋值也行啊，func()(2)，action就是一个接受一个参数的匿名函数对象嘛。既然是一个函数对象，那就要用()才能调用它，然后这个函数对象接受一个参数，那就给个参数它咯:)。", "isacceped":true, "voteup":2, "votedown":2}]}
+{"_id":3, "title":"关于Python里面lambda用法的一个疑惑","asker":3, "tags":[1,2], "description": "标题描述可能不是很准确 因为我不知道问题的原因在哪里可以安装在andorid,ios设备上,分别用什么语言开发请指点","asktime":"2014-02-18T16:16:58Z", "location":"46.22,-68.45", "voteup": 5, "votedown":2, "views":32, "answers": 5 }
+
+
+DELETE /questions/answers/
+
+PUT /questions/answers/_mapping
+{
+    "answers":{
+          "_parent": {"type": "question"},
+          "properties": {                   
+                   "anstime": {
+                        "type": "string",
+                        "format": "date_time_no_millis"
+                    },  
+                    "answer": {
+                        "type": "string",                    
+                        "index_analyzer": "index_ansj",
+                        "search_analyzer": "query_ansj"
+                    },
+                    "isacceped": {
+                        "type": "boolean",
+                        "index": "not_analyzed"
+                    },      
+                    "voteup": {
+                        "type": "long",
+                       "index": "not_analyzed"
+                    },
+                     "votedown": {
+                        "type": "long",
+                       "index": "not_analyzed"
+                    }
+                    
+          }
+       }    
+}
+    
+
+POST /questions/answers/1?parent=1
+ { "anstime":"2014-02-18T14:16:58Z", "answer":"跨平台可以考虑HTML5", "isacceped":false, "voteup":2, "votedown":2} 
+POST /questions/answers/1?parent=1
+ {"anstime":"2014-02-18T14:17:58Z", "answer":"Objective-C、Java、C", "isacceped":true, "voteup":3, "votedown":5}
+POST /questions/answers/1?parent=1
+ {"anstime":"2014-02-19T14:17:58Z", "answer":"可以用java", "isacceped":false, "voteup":2, "votedown":6 }
+ 
+
+POST /questions/answers/4?parent=2
+{"anstime":"2014-02-18T14:16:58Z", "answer": "发现广告视频的HTTP请求出现失败（阻断、限权、0长度等）就可以了","isacceped":false, "voteup":2, "votedown":2}
+POST /questions/answers/5?parent=2
+{"anstime":"2014-02-18T16:16:58Z", "answer":"除了主动判断之外，还可以守株待兔比如广告后面放一层就是提示广告不见鸟的图片，如果广告不见则见图片……\r\n就像 如果外衣不见则见内衣", "isacceped":true, "voteup":2, "votedown":2}
+POST /questions/answers/6?parent=2
+{"anstime":"2014-02-19T16:16:58Z", "answer":"用新的方法", "isacceped":false, "voteup":5, "votedown":6}
+POST /questions/answers/7?parent=2
+{"anstime":"2014-02-20T16:16:58Z", "answer":"第四个答案", "isacceped":false, "voteup":3, "votedown":1}
+
+
+POST /questions/answers/8?parent=3
+{"anstime":"2014-02-18T15:16:58Z", "answer":"首先更正你的一个概念：\r\n为什么需要先把x赋值给func() 正确的说法是 把func()的返回值赋值给x。然后再来看看这段代码的实际含义：\r\ndef func(): #\n定义函数 func() \n  x = 4 # 函数内部变量 x \n action = (lambda n: x ** n) # \n 定义匿名函数 action(n) \n return action # 返回函数 action 函数对象本身，而不是它的值 \r\n x = func() # func()的返回值赋值给 x，此时的 x 是一个函数对象print x(2) # 调用 action(2)\n其实还可以等价写成下面这个样子：\ndef outer_func(): \n x = 4 \n def inner_func(n): \n return x ** n \n   return inner_func \n x = outer_func() \n print x(2) 如有疑问.", "isacceped":false, "voteup":2, "votedown":2}
+POST /questions/answers/9?parent=3
+{"anstime":"2014-02-19T14:16:58Z", "answer":"不赋值也行啊，func()(2)，action就是一个接受一个参数的匿名函数对象嘛。既然是一个函数对象，那就要用()才能调用它，然后这个函数对象接受一个参数，那就给个参数它咯:)。", "isacceped":true, "voteup":2, "votedown":2}
+POST /questions/answers/10?parent=3
+{"anstime":"2014-02-20T16:16:58Z", "answer":"第3个答案", "isacceped":false, "voteup":3, "votedown":1}
+POST /questions/answers/11?parent=3
+{"anstime":"2014-02-20T16:16:58Z", "answer":"第4个答案", "isacceped":false, "voteup":3, "votedown":1}
+POST /questions/answers/12?parent=3
+{"anstime":"2014-02-20T16:16:58Z", "answer":"第5个答案", "isacceped":false, "voteup":3, "votedown":1}
 
 
 POST /questions/question/_search
@@ -333,6 +454,7 @@ POST /questions/question/_search
       }
    ]
 }
+
 
 
 //////////////////////////////business logic
