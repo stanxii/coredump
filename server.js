@@ -69,75 +69,15 @@ var esclient = new elasticsearch.Client({
   log: 'trace'
 });  
 
-var questionTopFun = function(httpres,  jsondata){
-    // 主页 topest 100 question 
-          //按提问时间排序最近提问的100个问题
-            
-          
-          var userQuery = {};
-
-          esclient.search({
-              index: 'questions',
-              type: 'question',                            
-              body: {                
-                  query: {
-                    match_all: {}
-                  } ,
-                  size: jsondata.qnum,  
-				  sort: {"asktime":"desc"}
-              }
-            }, function (error, response) {
-              var res = {
-                  result:"ok",
-                  questions: ""
-                }
-
-              var result = [];
-                
-              if (error) {
-                // handle error
-                res.result = "failed";                
-              }else{
-              	res.result = "ok"; 
-              	for(var i= 0; i< response.hits.hits.length; i++ ){
-                    result.push(response.hits.hits[i]._source);
-                }
-                res.questions = result;
-              }
-              //console.log("now search result = " + JSON.stringify(response));
-               
-
-
-                console.log("result ES ==" + JSON.stringify(res));
-    			httpres.send(res);//给客户端返回一个json格式的数据
-    			httpres.end();
-                /*
-                var  searchres [];
-                for(int i= 0; i< response.hits.hits.length; i++ ){
-                    searchres.push
-                }
-                */
-            });
-};
-
-app.post('/top-questions', function(req, res, next) {
-    console.log(req.body);//请求中还有参数data,data的值为一个json字符串
-// var data= eval_r('(' + req.body.data + ')');//需要将json字符串转换为json对象
-// console.log("data="+data.PhoneNumber);
-    console.log(req.body.qnum);//解析json格式数据
-    res.contentType('json');//返回的数据类型
-
-    var data = req.body;
-    
-
-    questionTopFun(res, data);
-
-    
-});
 
 //rest api call from http post to 3 thrd 
 app.post('/askquestion', function(req, res) {
-    restapi.askQuestion(esclient, req, res, esclient);   
+    restapi.askQuestion(esclient, redis, req, res);   
+});
+
+//rest api call from http post to 3 thrd 
+app.post('/get-question/:qid', function(req, res) {
+    restapi.detailQuestion(esclient, redis, req, res);   
 });
 
 app.post('/home-top-questions', function(req, res) {

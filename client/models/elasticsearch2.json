@@ -344,6 +344,10 @@ PUT /questions/question/_mapping
                 "type": "string",
                 "format": "date_time_no_millis"
             },
+            "urlimg": {
+                "type": "string",
+                "format": "not_analyzed"
+            },            
             "location": {
                 "type": "geo_point"
             },

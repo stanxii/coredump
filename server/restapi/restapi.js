@@ -1,4 +1,5 @@
-var Askquestion = require('../restapi/questions/ask.question.js');
+var AskQuestion = require('../restapi/questions/ask.question.js');
+var DetailQuestion = require('../restapi/questions/detail.question.js');
 var TabTopQ = require('../restapi/tabquestions/tab.top.questions.js');
 var TabInterestQ = require('../restapi/tabquestions/tab.interesting.questions.js');
 var TabFeaturedQ = require('../restapi/tabquestions/tab.featured.questions.js');
@@ -18,7 +19,10 @@ var UnanswersQuestions = require('../restapi/questions/unanswers.questions.js');
 
 module.exports = {
     askQuestion: function(esclient, redis, req, res) {
-        Askquestion.askQuestion(esclient, redis, req, res);        
+        AskQuestion.askQuestion(esclient, redis, req, res);        
+    },
+    detailQuestion: function(esclient, redis, req, res) {
+        DetailQuestion.detailQuestion(esclient, redis, req, res);        
     },
     //questions tab== list get frome redis sorted set quene very fast.
     tabTopQuestions: function(esclient, redis, req, res) {

@@ -98,20 +98,33 @@ angular.module('nggl')
 
 angular.module('nggl')
 .controller('QuestionsAskCtrl',
-[   '$rootScope', '$scope', '$location', 'Auth',
-function($rootScope, $scope, $location,  Auth) {
+[   '$rootScope', '$scope', '$http', '$location', 'Auth',
+function($rootScope, $scope, $http, $location,  Auth) {
 
+    $scope.tag = "";
 
     $scope.question = {               
-        title: "",
-		tag: "",
-        description: "",
-		urlimg: "",
-        answers: []        
+        "title": "no title",
+        "asker": 1,
+		"tags": [],
+        "description": "",
+        "asktime":"",
+		"urlimg": "",
+        "voteup": 0,
+        "votedown":0,
+        "views":0,
+        "answers": 0        
     };
 
     $scope.askQuestion = function() {
 		$scope.question.urlimg = Auth.user.urlimg;
+
+        console.log("tagname=" + $scope.tag);
+        //search tag id by tagname
+
+        //push tagid
+        $scope.question.tags.push(3);
+
         var jsondata = $scope.question ;        
 
         ///////////////////
@@ -125,11 +138,11 @@ function($rootScope, $scope, $location,  Auth) {
         //$http.post(url, jsondata, postCfg)
         $http.post(url, jsondata)
             .success(function(data, status){
-                if(data.result === "ok"){
-                    $scope.questions = data.questions;
-                    console.log("ok questions =" + $scope.qid);
+                if(data.status === "ok"){
+                   
+                    console.log("ok ask questions =" + data.qid);
                     console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
-                    $location.path('/questions/' + data.id);
+                    $location.path('/questions/' + data.qid);
                 }
                 else
                     return;
@@ -147,8 +160,8 @@ function($rootScope, $scope, $location,  Auth) {
 
 angular.module('nggl')
 .controller('QuestionsDetailCtrl',
-[   '$rootScope', '$scope', '$routeParams', '$location', 'Auth',
-function($rootScope, $scope, $routeParams, $location, Auth) {
+[   '$rootScope', '$scope', '$routeParams', '$http', '$location', 'Auth',
+function($rootScope, $scope, $routeParams, $http, $location, Auth) {
 
     // $routeParams.qid
 
@@ -157,6 +170,30 @@ function($rootScope, $scope, $routeParams, $location, Auth) {
             qid : $routeParams.qid
         }
     //socket.emit('send:questions.question' , jsondata);
+
+     ///////////////////
+        var url = '/get-question/'+ jsondata.qid;
+       
+    $scope.question;
+
+    $http.post(url, jsondata)
+            .success(function(data, status){
+                if(data.status === "ok"){
+                    $scope.question = data.question;
+                    console.log("questions =" + $scope.question);
+                }
+                else
+                    return;
+            })
+            .error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+            });
+
+
+        
+        //////////////////
+
     
     $scope.newanswer = {               
         askerid: "",
@@ -168,21 +205,10 @@ function($rootScope, $scope, $routeParams, $location, Auth) {
 	
 	$scope.submitAnswer = function() {			
         var jsondata = $scope.newanswer ;		
-        //保存到数据库
-        //socket.emit('send:questions.question.answer' , jsondata);
+        
     }
 
-  //   socket.on('send:questions.question.res', function (data) {
-  //       console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
-         
-  //       if(data.result === "ok"){
-  //           $scope.question = data.question;			
-  //       }else if(data.result === "reload"){
-		// 	location.reload();
-		// }else
-  //           return;
-
-  //   });
+  
     
 }]);
 
