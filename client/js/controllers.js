@@ -241,6 +241,29 @@ angular.module('nggl')
 function($rootScope, $scope, $http, $location) {
 
     // $routeParams.qid
+    $scope.questions = [];
+    //unanswer 
+    $scope.getUnanswerQuestions = function() {  
+        //var url = '/home-top-questions';
+            var jsondata = {
+                qnum : 50
+                };
+            var url = '/unanswer-questions';
+            $http.post(url, jsondata)
+                    .success(function(data, status){
+                        if(data.status == "ok"){
+                            $scope.unanswerquestions = data.questions;
+                            console.log("unanswer questions =" + $scope.questions);
+                        }
+                        else
+                            return;
+                    })
+                    .error(function(data, status) {
+                        $scope.data = data || "Request failed";
+                        $scope.status = status;
+                    });
+
+    };
 
     console.log("now get top 100 questions  = ");
     $scope.userQuery = "*";
@@ -249,19 +272,14 @@ function($rootScope, $scope, $http, $location) {
             userQuery: $scope.userQuery
         }
     
-     $scope.getQid = function(question) {
+    $scope.getQid = function(question) {
         return question._id;
     }
 
     //var url = '/home-top-questions';
     var url = '/newest-questions';
 
-    var postCfg = {
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-               /* transformRequest: transFn*/
-            };
     
-
     //$http.post(url, jsondata, postCfg)
     $http.post(url, jsondata)
             .success(function(data, status){

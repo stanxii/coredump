@@ -45,8 +45,31 @@ module.exports = {
 			  			redis.lpush('last.questions', qid);	
 			  			redis.ltrim('last.questions', 0, topn);
 			  			result.qid = qid;
-			  			res.json(result);
 
+			  			//unanswers questions redis sorted set
+			  			var mills = moment().valueOf();
+			  			console.log('milliseconds=' + mills);
+			  			redis.zcard('unanswers.questions', function(err, response){
+			  				if(err)return;
+			  				console.log("now zcard=" + response);
+			  				if(response >=50 ){
+			  					//rem last
+			  					zremrangebyrank('unanswers.questions', 0, 0,function(){
+			  						redis.zadd('unanswers.questions', mills, qid, function(err, response) {
+						  				if(err) throw err;
+						  				res.json(result);
+						  			});
+			  					});
+			  				}else{
+			  					redis.zadd('unanswers.questions', mills, qid, function(err, response) {
+						  				if(err) throw err;
+						  				res.json(result);
+						  			});
+			  				}
+
+				  			
+			  		   });
+			  				
 			  		}else{
 			  			result.status = "failed";
 			  			res.json(result);

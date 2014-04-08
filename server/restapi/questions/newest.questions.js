@@ -34,12 +34,17 @@ module.exports = {
 
 
         			esclient.mget( jsonbody, function(error, response){						  
-						   for(var i=0; i< response.docs.length; i++){
-						   	  var question = response.docs[i]._source;						   	  
-						      result.questions.push(question);						      
+        				console.log('get ressssss' + response);
+        				if(response.docs){
+        					for(var i=0; i< response.docs.length; i++){
+						   	  if(response.docs[i].found){
+						   	    var question = response.docs[i]._source;						   	  
+						        result.questions.push(question);						      
+						      }
 						   }
-
-						   res.json(result);
+        				}
+						   
+						 res.json(result);
 						   
 						});
         		}

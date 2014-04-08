@@ -1,4 +1,74 @@
 
+var innerNewAnswer = function(esclient, redis, req, res, question){
+	//create a id
+		redis.incr("global:answerid", function(err, answerid){
+			var result = {
+                  status:"ok",
+                  answerid: 0
+                };
+
+			//create index in es
+			esclient.index({
+			  index: 'answers',
+			  type: 'answer',
+			  id: answerid,
+			  parent: question._source._id,
+			  body: newanswer
+			}, function (error, response) {
+			  // ...
+			  if(error){
+			  	result.status = "failed";
+			  }else{
+			  	
+			  	redis.get("global:top:question:n", function(err, topn) {
+			  		//top n questions redis list
+			  		if(topn){			  	
+			  			//delete from unanswers questions sorted set
+			  			redis.zrem('unanswers.question', qid, function(){
+			  				//add hot sorted set queue score = answers + votes.
+			  				    var hotqueue = 'hot.questions';
+				  				redis.zcard(hotqueue, function(err, response){
+					  				if(err)return;
+					  				console.log("now hot zcard=" + response);
+					  				//score ==answers + votes
+					  				var scores = question._source.voteup - question._source.votedown + question.answers ;
+					  				if(response >=50 ){
+					  					//rem last
+					  					zremrangebyrank(hotqueue, 0, 0,function(){
+					  						redis.zadd(hotqueue, scores, qid, function(err, response) {
+								  				if(err) throw err;
+								  				res.json(result);
+								  			});
+					  					});
+					  				}else{
+
+					  					redis.zadd(hotqueue, scores, qid, function(err, response) {
+								  				if(err) throw err;
+								  				res.json(result);
+								  			});
+					  				}
+			  		       });
+
+			  			});
+
+			  			redis.lpush('last.questions', qid);	
+			  			redis.ltrim('last.questions', 0, topn);
+			  			result.qid = qid;
+			  			res.json(result);
+			  		}else{
+			  			result.status = "failed";
+			  			res.json(result);
+			  		}
+					
+				
+			  	});  
+				
+								
+			  }
+			  
+			});
+		});
+};
 
 module.exports = {
     newAnswer: function(esclient, redis, req, res) {
@@ -21,47 +91,26 @@ module.exports = {
         newanswer.anstime = anstime;
 
 
-		//create a id
-		redis.incr("global:answerid", function(err, answerid){
-			var result = {
-                  status:"ok",
-                  answerid: 0
-                };
+		var userquery = {index: 'questions', type: 'question', id: jsondata.qid ,
+					     body:{
+					     	"script": "ctx._source.answers += 1"
+					     }
+	         };
+        //get parent
+        esclient.update( userquery, function(error, question){	
+        	if(error){
+        		console.log(error);        		
+        	}else{
+        		innerNewAnswer(esclient, redis, req, res, question);
+        	}					  
 
-            console.log("answerid="+ answerid);    
-			//create index in es
-			esclient.index({
-			  index: 'answers',
-			  type: 'answer',
-			  id: answerid,
-			  parent: jsondata.qid,
-			  body: newanswer
-			}, function (error, response) {
-			  // ...
-			  if(error){
-			  	result.status = "failed";
-			  }else{
-			  	
-			  	redis.get("global:top:question:n", function(err, topn) {
-			  		//top n questions redis list
-			  		if(topn){
-			  			redis.lpush('last.questions', qid);	
-			  			redis.ltrim('last.questions', 0, topn);
-			  			result.qid = qid;
-			  			res.json(result);
-			  		}else{
-			  			result.status = "failed";
-			  			res.json(result);
-			  		}
-					
-				
-			  	});  
-				
-								
-			  }
-			  
-			});
-		});
+						   
+	    });
+
+
+        //////////////////////////////
+
+		
         
     }
 };
