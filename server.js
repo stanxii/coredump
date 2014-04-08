@@ -84,6 +84,16 @@ app.post('/home-top-questions', function(req, res) {
     restapi.tabTopQuestions(esclient, redis, req, res);   
 });
 
+app.post('/newest-questions', function(req, res) {
+    restapi.newestQuestions(esclient, redis, req, res);   
+});
+
 app.post('/most-answers-questions', function(req, res) {
     restapi.answersQuestions(esclient, redis, req, res);   
+});
+
+
+///answers
+app.post('/new-answer', function(req, res) {
+    restapi.newAnswer(esclient, redis, req, res);   
 });

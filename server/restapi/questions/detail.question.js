@@ -18,7 +18,8 @@ module.exports = {
 
 		var result = {
                   status:"ok",
-                  question: {}
+                  question: {},
+                  answers: []
                 };
 
 		//create index in es
@@ -30,10 +31,13 @@ module.exports = {
 			  // ...
 			  if(error){			  	
 			  	result.status = "failed";			  
-			  	console.log("fuckkkk rerrrrrrrr=====" + error);
-			  }	
+			  	console.log("e rerrrrrrrr=====" + error);
+			  }				  
 			  result.question = response._source;
-			  console.log("fuckkkk result=====" + result);
+
+			  //query answers
+			  
+			  console.log("e result=====" + result);
 			  res.json(result);				
 			});
 		

@@ -17,7 +17,16 @@ var ViewsQuestions = require('../restapi/questions/views.questions.js');
 var AnswersQuestions = require('../restapi/questions/answers.questions.js'); 
 var UnanswersQuestions = require('../restapi/questions/unanswers.questions.js'); 
 
+//answer
+var NewAnswer = require('../restapi/answers/new.answer.js');
+
 module.exports = {
+    //answers
+    newAnswer: function(esclient, redis, req, res) {
+        NewAnswer.newAnswer(esclient, redis, req, res);        
+    },
+
+    //questions
     askQuestion: function(esclient, redis, req, res) {
         AskQuestion.askQuestion(esclient, redis, req, res);        
     },

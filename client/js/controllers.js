@@ -138,7 +138,7 @@ function($rootScope, $scope, $http, $location,  Auth) {
         //$http.post(url, jsondata, postCfg)
         $http.post(url, jsondata)
             .success(function(data, status){
-                if(data.status === "ok"){
+                if(data.status == "ok"){
                    
                     console.log("ok ask questions =" + data.qid);
                     console.log("send:questions.ask.res alarms list" + JSON.stringify(data));         
@@ -175,11 +175,13 @@ function($rootScope, $scope, $routeParams, $http, $location, Auth) {
         var url = '/get-question/'+ jsondata.qid;
        
     $scope.question;
+    $scope.answers = [];
 
     $http.post(url, jsondata)
             .success(function(data, status){
-                if(data.status === "ok"){
+                if(data.status == "ok"){
                     $scope.question = data.question;
+                    $scope.answers = data.answers;
                     console.log("questions =" + $scope.question);
                 }
                 else
@@ -195,17 +197,38 @@ function($rootScope, $scope, $routeParams, $http, $location, Auth) {
         //////////////////
 
     
-    $scope.newanswer = {               
-        askerid: "",
-        imageUrl: Auth.user.urlimg,
-		answer_dt: "",
-        description: "",		
+    $scope.newanswer = {  
+        answer: {
+            askerid: "",
+            imageUrl: Auth.user.urlimg,
+            answer_dt: "",
+            answer: "",
+            isacceped: false,
+            voteup: 0,
+            votedown: 0    
+        },                     
 		qid: $routeParams.qid,
+
     };
 	
 	$scope.submitAnswer = function() {			
-        var jsondata = $scope.newanswer ;		
+        var jsonanswer = $scope.newanswer ;		            
         
+        var url = '/new-answer';
+
+        $http.post(url, jsonanswer)
+            .success(function(data, status){
+                if(data.status == "ok"){
+                    $scope.question = data.question;
+                    console.log("questions =" + $scope.question);
+                }
+                else
+                    return;
+            })
+            .error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+            });
     }
 
   
@@ -230,7 +253,9 @@ function($rootScope, $scope, $http, $location) {
         return question._id;
     }
 
-    var url = '/home-top-questions';
+    //var url = '/home-top-questions';
+    var url = '/newest-questions';
+
     var postCfg = {
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                /* transformRequest: transFn*/
@@ -240,7 +265,7 @@ function($rootScope, $scope, $http, $location) {
     //$http.post(url, jsondata, postCfg)
     $http.post(url, jsondata)
             .success(function(data, status){
-                if(data.status === "ok"){
+                if(data.status == "ok"){
                     $scope.questions = data.questions;
                     console.log("questions =" + $scope.questions);
                 }
