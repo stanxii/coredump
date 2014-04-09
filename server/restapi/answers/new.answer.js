@@ -1,19 +1,22 @@
 
-var innerNewAnswer = function(esclient, redis, req, res, question, newanswer){
+var innerNewAnswer = function(esclient, redis, req, res, qid, question, newanswer){
 	//create a id
+		console.log("ininer");
 		redis.incr("global:answerid", function(err, answerid){
 			var result = {
                   status:"ok",
                   answerid: 0
                 };
 
-            console.log("question===" + question);
+	console.log("question 111===" + question);
+
+            console.log("question 22===" + question);
 			//create index in es
 			esclient.index({
-			  index: 'answers',
-			  type: 'answer',
+			  index: 'questions',
+			  type: 'answers',
 			  id: answerid,
-			  parent: question._id,
+			  parent: qid,
 			  body: newanswer
 			}, function (error, response) {
 			  // ...
@@ -21,6 +24,7 @@ var innerNewAnswer = function(esclient, redis, req, res, question, newanswer){
 			  	result.status = "failed";
 			  }else{
 			  	
+
 			  	redis.get("global:top:question:n", function(err, topn) {
 			  		//top n questions redis list
 			  		if(topn){			  	
@@ -31,8 +35,9 @@ var innerNewAnswer = function(esclient, redis, req, res, question, newanswer){
 				  				redis.zcard(hotqueue, function(err, response){
 					  				if(err)return;
 					  				console.log("now hot zcard=" + response);
+					  				console.log("now hot zcard=" + JSON.stringify(question));
 					  				//score ==answers + votes
-					  				var scores = question._source.voteup - question._source.votedown + question.answers ;
+					  				var scores = question.voteup - question.votedown + question.answers ;
 					  				if(response >=50 ){
 					  					//rem last
 					  					zremrangebyrank(hotqueue, 0, 0,function(){
@@ -98,14 +103,21 @@ module.exports = {
 					     }
 	         };
         //get parent
-        esclient.update( userquery, function(error, question){	
+        esclient.update( userquery, function(error, upres){	
         	if(error){
         		console.log(error);        		
         	}else{
-        		innerNewAnswer(esclient, redis, req, res, question, newanswer);
-        	}					  
-
-						   
+        		var getquery = {index: 'questions', type: 'question', id: jsondata.qid };
+        		 esclient.get( getquery, function(error, getquestion){
+        		 	if(error){
+        		 		console.log(error);        		
+        		 		return;
+        		 	}else{
+        		 		console.log("update.....=" + JSON.stringify(getquestion));		        		
+		        		innerNewAnswer(esclient, redis, req, res, getquestion._id, getquestion._source, newanswer);	
+        		 	}        		 	
+        		 });        		
+        	}					  						   
 	    });
 
 
