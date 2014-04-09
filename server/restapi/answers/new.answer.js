@@ -1,5 +1,5 @@
 
-var innerNewAnswer = function(esclient, redis, req, res, question){
+var innerNewAnswer = function(esclient, redis, req, res, question, newanswer){
 	//create a id
 		redis.incr("global:answerid", function(err, answerid){
 			var result = {
@@ -7,12 +7,13 @@ var innerNewAnswer = function(esclient, redis, req, res, question){
                   answerid: 0
                 };
 
+            console.log("question===" + question);
 			//create index in es
 			esclient.index({
 			  index: 'answers',
 			  type: 'answer',
 			  id: answerid,
-			  parent: question._source._id,
+			  parent: question._id,
 			  body: newanswer
 			}, function (error, response) {
 			  // ...
@@ -101,7 +102,7 @@ module.exports = {
         	if(error){
         		console.log(error);        		
         	}else{
-        		innerNewAnswer(esclient, redis, req, res, question);
+        		innerNewAnswer(esclient, redis, req, res, question, newanswer);
         	}					  
 
 						   

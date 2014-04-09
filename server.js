@@ -88,6 +88,10 @@ app.post('/newest-questions', function(req, res) {
     restapi.newestQuestions(esclient, redis, req, res);   
 });
 
+app.post('/hot-questions', function(req, res) {
+    restapi.tabHotQuestion(esclient, redis, req, res);   
+});
+
 app.post('/most-answers-questions', function(req, res) {
     restapi.answersQuestions(esclient, redis, req, res);   
 });

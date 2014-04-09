@@ -242,6 +242,30 @@ function($rootScope, $scope, $http, $location) {
 
     // $routeParams.qid
     $scope.questions = [];
+
+    //unanswer 
+    $scope.getHotQuestions = function() {  
+        //var url = '/home-top-questions';
+            var jsondata = {
+                qnum : 50
+                };
+            var url = '/hot-questions';
+            $http.post(url, jsondata)
+                    .success(function(data, status){
+                        if(data.status == "ok"){
+                            $scope.questions = data.questions;
+                            console.log("hot questions =" + $scope.questions);
+                        }
+                        else
+                            return;
+                    })
+                    .error(function(data, status) {
+                        $scope.data = data || "Request failed";
+                        $scope.status = status;
+                    });
+
+    };
+
     //unanswer 
     $scope.getUnanswerQuestions = function() {  
         //var url = '/home-top-questions';
@@ -252,7 +276,7 @@ function($rootScope, $scope, $http, $location) {
             $http.post(url, jsondata)
                     .success(function(data, status){
                         if(data.status == "ok"){
-                            $scope.unanswerquestions = data.questions;
+                            $scope.questions = data.questions;
                             console.log("unanswer questions =" + $scope.questions);
                         }
                         else
@@ -273,7 +297,7 @@ function($rootScope, $scope, $http, $location) {
         }
     
     $scope.getQid = function(question) {
-        return question._id;
+        return question.qid;
     }
 
     //var url = '/home-top-questions';

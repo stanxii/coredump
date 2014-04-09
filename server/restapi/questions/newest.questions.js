@@ -38,7 +38,8 @@ module.exports = {
         				if(response.docs){
         					for(var i=0; i< response.docs.length; i++){
 						   	  if(response.docs[i].found){
-						   	    var question = response.docs[i]._source;						   	  
+						   	    var question = response.docs[i]._source;
+                                question.qid = response.docs[i]._id;						   	  
 						        result.questions.push(question);						      
 						      }
 						   }
